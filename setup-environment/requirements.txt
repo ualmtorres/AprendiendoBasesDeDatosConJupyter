@@ -1,0 +1,10 @@
+numpy==1.26.0
+pandas==2.1.4
+matplotlib==3.8.0
+trino==0.330.0
+pyarrow==19.0.1
+grpcio==1.71.0
+pyspark==3.5.5
+jupysql==0.11.0
+pymysql==1.1.1
+psycopg2-binary

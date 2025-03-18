@@ -1,0 +1,5095 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Introducción práctica a SQL &#8212; Mi Tutorial en Jupyter Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'data/sql';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Licencia" href="../LICENSE.html" />
+    <link rel="prev" title="Configuración del entorno de trabajo" href="dbbasics.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/di.png" class="logo__image only-light" alt="Mi Tutorial en Jupyter Book - Home"/>
+    <script>document.write(`<img src="../_static/di.png" class="logo__image only-dark" alt="Mi Tutorial en Jupyter Book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Aprendiendo bases de datos con Jupyter
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="dbbasics.html">Configuración del entorno de trabajo</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Introducción práctica a SQL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LICENSE.html">Licencia</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="http://localhost:8888/lab/hub/user-redirect/git-pull?repo=https%3A//github.com/tu_usuario/mi_tutorial&urlpath=tree/mi_tutorial/data/sql.ipynb&branch=main" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on JupyterHub"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="JupyterHub logo" src="../_static/images/logo_jupyterhub.svg">
+  </span>
+<span class="btn__text-container">JupyterHub</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/tu_usuario/mi_tutorial" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/tu_usuario/mi_tutorial/edit/main/data/sql.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/tu_usuario/mi_tutorial/issues/new?title=Issue%20on%20page%20%2Fdata/sql.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/data/sql.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Introducción práctica a SQL</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion">Introducción</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usos">Usos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuracion-del-entorno">Configuración del entorno</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sintaxis-basica">Sintaxis básica</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#operaciones-de-consulta-sencillas-para-el-filtrado-de-filas-y-columnas">Operaciones de consulta sencillas para el filtrado de filas y columnas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consultas-con-varias-condiciones">Consultas con varias condiciones</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#el-operador-logico-and">El operador lógico AND</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#el-operador-logico-or">El operador lógico OR</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#el-operador-logico-in-y-busqueda-aproximada">El operador lógico IN y búsqueda aproximada</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#manejo-de-nulos">Manejo de nulos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#consultas-de-un-rango-de-valores">Consultas de un rango de valores</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uso-de-expresiones-en-select">Uso de expresiones en SELECT</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#renombrado-de-columnas">Renombrado de columnas</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#manejo-de-fechas">Manejo de fechas</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#funciones-para-el-manejo-de-fechas">Funciones para el manejo de fechas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#codigos-de-formato-habituales-para-datediff">Códigos de formato habituales para <code class="docutils literal notranslate"><span class="pre">DATEDIFF()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eliminacion-de-duplicados">Eliminación de duplicados</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ordenacion-y-limitacion-de-resultados">Ordenación y limitación de resultados</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#funciones-de-agregacion">Funciones de agregación</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agregacion-de-resultados">Agregación de resultados</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#combinacion-de-tablas-con-producto-cartesiano">Combinación de tablas con producto cartesiano</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#combinacion-de-tablas-con-inner-join">Combinación de tablas con INNER JOIN</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#combinacion-de-tablas-con-left-join">Combinación de tablas con LEFT JOIN</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uso-de-alias-para-tablas">Uso de alias para tablas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#subconsultas">Subconsultas</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#los-operadores-all-y-any">Los operadores ALL y ANY</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subconsultas-en-from">Subconsultas en FROM</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#insercion-modificacion-y-eliminacion-de-registros">Inserción, modificación y eliminación de registros</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uso-basico-de-insert-introduccion-de-todos-los-valores">Uso básico de INSERT (Introducción de todos los valores)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uso-de-insert-para-anadir-filas-incompletas-no-se-introducen-todos-los-valores">Uso de INSERT para añadir filas incompletas (No se introducen todos los valores)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#actualizacion-de-registros-con-update">Actualización de registros con UPDATE</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eliminacion-de-registros-con-delete">Eliminación de registros con DELETE</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vistas">Vistas</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="introduccion-practica-a-sql">
+<h1>Introducción práctica a SQL<a class="headerlink" href="#introduccion-practica-a-sql" title="Link to this heading">#</a></h1>
+<section id="introduccion">
+<h2>Introducción<a class="headerlink" href="#introduccion" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Del inglés <em>Structured Query Language</em>.</p></li>
+<li><p>Lenguaje más extendido para consultar y manipular Bases de datos relacionales.</p></li>
+<li><p>SQL es un lenguaje estándar. No obstante, existen gran cantidad de <em>dialectos</em>.</p></li>
+</ul>
+</section>
+<section id="usos">
+<h2>Usos<a class="headerlink" href="#usos" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Consulta de datos.</p></li>
+<li><p>Manipulación de datos (Inserción, modificación, eliminación).</p></li>
+<li><p>Definición de datos (Tablas, Índices, Vistas, …).</p></li>
+<li><p>Configuración de seguridad (Usuarios, permisos, …).</p></li>
+<li><p>…</p></li>
+</ul>
+</section>
+<section id="configuracion-del-entorno">
+<h2>Configuración del entorno<a class="headerlink" href="#configuracion-del-entorno" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> sql
+<span class="o">%</span><span class="k">sql</span> mysql+pymysql://example:example@mysql/example
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The sql extension is already loaded. To reload it, use:
+  %reload_ext sql
+</pre></div>
+</div>
+<div class="output text_html"><span style="None">Connecting and switching to connection &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+DROP TABLE IF EXISTS Empleados;
+DROP TABLE IF EXISTS Departamentos;
+
+CREATE TABLE Departamentos
+       (id TINYINT,
+        nombre VARCHAR(14),
+        ciudad VARCHAR(13),
+        PRIMARY KEY(id));
+
+INSERT INTO Departamentos VALUES (10,&#39;Contabilidad&#39;,&#39;Nueva York&#39;);
+INSERT INTO Departamentos VALUES (20,&#39;Investigacion&#39;,&#39;Dallas&#39;);
+INSERT INTO Departamentos VALUES (30,&#39;Ventas&#39;,&#39;Chicago&#39;);
+INSERT INTO Departamentos VALUES (40,&#39;Operaciones&#39;,&#39;Boston&#39;);
+
+CREATE TABLE Empleados
+       (id INT NOT NULL,
+        nombre VARCHAR(10),
+        empleo VARCHAR(9),
+        jefe INT,
+        fecha_entrada DATE,
+        sueldo FLOAT,
+        complemento FLOAT,
+        departamento_id TINYINT,
+        PRIMARY KEY(id),
+        FOREIGN KEY (departamento_id) REFERENCES Departamentos(id) );
+
+INSERT INTO Empleados VALUES
+        (7369,&#39;Smith&#39;,&#39;Ordenanza&#39;,7902,&#39;2000-12-17&#39;,800,NULL,20);
+INSERT INTO Empleados VALUES
+        (7499,&#39;Allen&#39;,&#39;Vendedor&#39;,7698,&#39;2001-02-20&#39;,1600,300,30);
+INSERT INTO Empleados VALUES
+        (7521,&#39;Ward&#39;,&#39;Vendedor&#39;,7698,&#39;2001-02-22&#39;,1250,500,30);
+INSERT INTO Empleados VALUES
+        (7566,&#39;Jones&#39;,&#39;Directivo&#39;,7839,&#39;2001-04-02&#39;,2975,NULL,20);
+INSERT INTO Empleados VALUES
+        (7654,&#39;Martin&#39;,&#39;Vendedor&#39;,7698,&#39;2001-09-28&#39;,1250,1400,30);
+INSERT INTO Empleados VALUES
+        (7698,&#39;Blake&#39;,&#39;Directivo&#39;,7839,&#39;2001-05-01&#39;,2850,NULL,30);
+INSERT INTO Empleados VALUES
+        (7782,&#39;Clark&#39;,&#39;Directivo&#39;,7839,&#39;2001-06-09&#39;,2450,NULL,10);
+INSERT INTO Empleados VALUES
+        (7788,&#39;Scott&#39;,&#39;Analista&#39;,7566,&#39;2002-12-09&#39;,3000,NULL,20);
+INSERT INTO Empleados VALUES
+        (7839,&#39;King&#39;,&#39;Director&#39;,NULL,&#39;2001-11-17&#39;,5000,NULL,10);
+INSERT INTO Empleados VALUES
+        (7844,&#39;Turner&#39;,&#39;Vendedor&#39;,7698,&#39;2001-09-08&#39;,1500,0,30);
+INSERT INTO Empleados VALUES
+        (7876,&#39;Adams&#39;,&#39;Ordenanza&#39;,7788,&#39;2003-01-12&#39;,1100,NULL,20);
+INSERT INTO Empleados VALUES
+        (7900,&#39;James&#39;,&#39;Ordenanza&#39;,7698,&#39;2001-12-03&#39;,950,NULL,30);
+INSERT INTO Empleados VALUES
+        (7902,&#39;Ford&#39;,&#39;Analista&#39;,7566,&#39;2001-12-03&#39;,3000,NULL,20);
+INSERT INTO Empleados VALUES
+        (7934,&#39;Miller&#39;,&#39;Ordenanza&#39;,7782,&#39;2002-01-23&#39;,1300,NULL,10);
+        
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">1 rows affected.</span></div><div class="output text_html"><span style="color: green">1 rows affected.</span></div><div class="output text_html"><span style="color: green">1 rows affected.</span></div><div class="output text_html"><span style="color: green">1 rows affected.</span></div><div class="output text_html"><span style="color: green">1 rows affected.</span></div><div class="output text_html"><span style="color: green">1 rows affected.</span></div><div class="output text_html"><span style="color: green">1 rows affected.</span></div><div class="output text_html"><span style="color: green">1 rows affected.</span></div><div class="output text_html"><span style="color: green">1 rows affected.</span></div><div class="output text_html"><span style="color: green">1 rows affected.</span></div><div class="output text_html"><span style="color: green">1 rows affected.</span></div><div class="output text_html"><span style="color: green">1 rows affected.</span></div><div class="output text_html"><span style="color: green">1 rows affected.</span></div><div class="output text_html"><span style="color: green">1 rows affected.</span></div><div class="output text_html"><span style="color: green">1 rows affected.</span></div><div class="output text_html"><span style="color: green">1 rows affected.</span></div><div class="output text_html"><span style="color: green">1 rows affected.</span></div><div class="output text_html"><span style="color: green">1 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table></div></div>
+</div>
+</section>
+<section id="sintaxis-basica">
+<h2>Sintaxis básica<a class="headerlink" href="#sintaxis-basica" title="Link to this heading">#</a></h2>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">COLUMNAS_SEPARADAS_POR_COMAS</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">TABLA</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">CONDICION</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="operaciones-de-consulta-sencillas-para-el-filtrado-de-filas-y-columnas">
+<h2>Operaciones de consulta sencillas para el filtrado de filas y columnas<a class="headerlink" href="#operaciones-de-consulta-sencillas-para-el-filtrado-de-filas-y-columnas" title="Link to this heading">#</a></h2>
+<p>Ejemplo. Mostrar todos los empleados</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT * 
+FROM Empleados;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">14 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>nombre</th>
+            <th>empleo</th>
+            <th>jefe</th>
+            <th>fecha_entrada</th>
+            <th>sueldo</th>
+            <th>complemento</th>
+            <th>departamento_id</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>7369</td>
+            <td>Smith</td>
+            <td>Ordenanza</td>
+            <td>7902</td>
+            <td>2000-12-17</td>
+            <td>800.0</td>
+            <td>None</td>
+            <td>20</td>
+        </tr>
+        <tr>
+            <td>7499</td>
+            <td>Allen</td>
+            <td>Vendedor</td>
+            <td>7698</td>
+            <td>2001-02-20</td>
+            <td>1600.0</td>
+            <td>300.0</td>
+            <td>30</td>
+        </tr>
+        <tr>
+            <td>7521</td>
+            <td>Ward</td>
+            <td>Vendedor</td>
+            <td>7698</td>
+            <td>2001-02-22</td>
+            <td>1250.0</td>
+            <td>500.0</td>
+            <td>30</td>
+        </tr>
+        <tr>
+            <td>7566</td>
+            <td>Jones</td>
+            <td>Directivo</td>
+            <td>7839</td>
+            <td>2001-04-02</td>
+            <td>2975.0</td>
+            <td>None</td>
+            <td>20</td>
+        </tr>
+        <tr>
+            <td>7654</td>
+            <td>Martin</td>
+            <td>Vendedor</td>
+            <td>7698</td>
+            <td>2001-09-28</td>
+            <td>1250.0</td>
+            <td>1400.0</td>
+            <td>30</td>
+        </tr>
+        <tr>
+            <td>7698</td>
+            <td>Blake</td>
+            <td>Directivo</td>
+            <td>7839</td>
+            <td>2001-05-01</td>
+            <td>2850.0</td>
+            <td>None</td>
+            <td>30</td>
+        </tr>
+        <tr>
+            <td>7782</td>
+            <td>Clark</td>
+            <td>Directivo</td>
+            <td>7839</td>
+            <td>2001-06-09</td>
+            <td>2450.0</td>
+            <td>None</td>
+            <td>10</td>
+        </tr>
+        <tr>
+            <td>7788</td>
+            <td>Scott</td>
+            <td>Analista</td>
+            <td>7566</td>
+            <td>2002-12-09</td>
+            <td>3000.0</td>
+            <td>None</td>
+            <td>20</td>
+        </tr>
+        <tr>
+            <td>7839</td>
+            <td>King</td>
+            <td>Director</td>
+            <td>None</td>
+            <td>2001-11-17</td>
+            <td>5000.0</td>
+            <td>None</td>
+            <td>10</td>
+        </tr>
+        <tr>
+            <td>7844</td>
+            <td>Turner</td>
+            <td>Vendedor</td>
+            <td>7698</td>
+            <td>2001-09-08</td>
+            <td>1500.0</td>
+            <td>0.0</td>
+            <td>30</td>
+        </tr>
+    </tbody>
+</table>
+<span style="font-style:italic;text-align:center;">Truncated to <a href="https://jupysql.ploomber.io/en/latest/api/configuration.html#displaylimit">displaylimit</a> of 10.</span></div></div>
+</div>
+<p>Ejemplo. Mostrar las filas de todos los empleados con empleo <em>Vendedor</em></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT * 
+FROM Empleados
+WHERE empleo = &#39;Vendedor&#39;;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">4 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>nombre</th>
+            <th>empleo</th>
+            <th>jefe</th>
+            <th>fecha_entrada</th>
+            <th>sueldo</th>
+            <th>complemento</th>
+            <th>departamento_id</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>7499</td>
+            <td>Allen</td>
+            <td>Vendedor</td>
+            <td>7698</td>
+            <td>2001-02-20</td>
+            <td>1600.0</td>
+            <td>300.0</td>
+            <td>30</td>
+        </tr>
+        <tr>
+            <td>7521</td>
+            <td>Ward</td>
+            <td>Vendedor</td>
+            <td>7698</td>
+            <td>2001-02-22</td>
+            <td>1250.0</td>
+            <td>500.0</td>
+            <td>30</td>
+        </tr>
+        <tr>
+            <td>7654</td>
+            <td>Martin</td>
+            <td>Vendedor</td>
+            <td>7698</td>
+            <td>2001-09-28</td>
+            <td>1250.0</td>
+            <td>1400.0</td>
+            <td>30</td>
+        </tr>
+        <tr>
+            <td>7844</td>
+            <td>Turner</td>
+            <td>Vendedor</td>
+            <td>7698</td>
+            <td>2001-09-08</td>
+            <td>1500.0</td>
+            <td>0.0</td>
+            <td>30</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+<p>Ejemplo. Mostrar el nombre, empleo y sueldo de todos los empleados</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT nombre, empleo, sueldo
+FROM Empleados;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">14 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>nombre</th>
+            <th>empleo</th>
+            <th>sueldo</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Smith</td>
+            <td>Ordenanza</td>
+            <td>800.0</td>
+        </tr>
+        <tr>
+            <td>Allen</td>
+            <td>Vendedor</td>
+            <td>1600.0</td>
+        </tr>
+        <tr>
+            <td>Ward</td>
+            <td>Vendedor</td>
+            <td>1250.0</td>
+        </tr>
+        <tr>
+            <td>Jones</td>
+            <td>Directivo</td>
+            <td>2975.0</td>
+        </tr>
+        <tr>
+            <td>Martin</td>
+            <td>Vendedor</td>
+            <td>1250.0</td>
+        </tr>
+        <tr>
+            <td>Blake</td>
+            <td>Directivo</td>
+            <td>2850.0</td>
+        </tr>
+        <tr>
+            <td>Clark</td>
+            <td>Directivo</td>
+            <td>2450.0</td>
+        </tr>
+        <tr>
+            <td>Scott</td>
+            <td>Analista</td>
+            <td>3000.0</td>
+        </tr>
+        <tr>
+            <td>King</td>
+            <td>Director</td>
+            <td>5000.0</td>
+        </tr>
+        <tr>
+            <td>Turner</td>
+            <td>Vendedor</td>
+            <td>1500.0</td>
+        </tr>
+    </tbody>
+</table>
+<span style="font-style:italic;text-align:center;">Truncated to <a href="https://jupysql.ploomber.io/en/latest/api/configuration.html#displaylimit">displaylimit</a> of 10.</span></div></div>
+</div>
+</section>
+<section id="consultas-con-varias-condiciones">
+<h2>Consultas con varias condiciones<a class="headerlink" href="#consultas-con-varias-condiciones" title="Link to this heading">#</a></h2>
+<section id="el-operador-logico-and">
+<h3>El operador lógico AND<a class="headerlink" href="#el-operador-logico-and" title="Link to this heading">#</a></h3>
+<p>Ejemplo. Mostrar las filas de todos los empleados con empleo <em>Vendedor</em> y complemento de al menos 500 EUR</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT *
+FROM Empleados
+WHERE empleo = &#39;Vendedor&#39; AND complemento &gt;= 500;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">2 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>nombre</th>
+            <th>empleo</th>
+            <th>jefe</th>
+            <th>fecha_entrada</th>
+            <th>sueldo</th>
+            <th>complemento</th>
+            <th>departamento_id</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>7521</td>
+            <td>Ward</td>
+            <td>Vendedor</td>
+            <td>7698</td>
+            <td>2001-02-22</td>
+            <td>1250.0</td>
+            <td>500.0</td>
+            <td>30</td>
+        </tr>
+        <tr>
+            <td>7654</td>
+            <td>Martin</td>
+            <td>Vendedor</td>
+            <td>7698</td>
+            <td>2001-09-28</td>
+            <td>1250.0</td>
+            <td>1400.0</td>
+            <td>30</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+<p>Ejemplo. Mostrar el nombre, empleo y sueldo de todos los empleados con empleo <em>Vendedor</em> y complemento de al menos 500 EUR</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT nombre, empleo, sueldo
+FROM Empleados
+WHERE empleo = &#39;Vendedor&#39; AND complemento &gt;= 500;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">2 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>nombre</th>
+            <th>empleo</th>
+            <th>sueldo</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Ward</td>
+            <td>Vendedor</td>
+            <td>1250.0</td>
+        </tr>
+        <tr>
+            <td>Martin</td>
+            <td>Vendedor</td>
+            <td>1250.0</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+</section>
+<section id="el-operador-logico-or">
+<h3>El operador lógico OR<a class="headerlink" href="#el-operador-logico-or" title="Link to this heading">#</a></h3>
+<p>Ejemplo. Mostrar todas las filas de los empleados que tengan empleo de Vendedor, Directivo u Ordenanza</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT *
+FROM Empleados
+WHERE empleo = &#39;Vendedor&#39; OR empleo = &#39;Directivo&#39; OR empleo = &#39;Ordenanza&#39;;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">11 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>nombre</th>
+            <th>empleo</th>
+            <th>jefe</th>
+            <th>fecha_entrada</th>
+            <th>sueldo</th>
+            <th>complemento</th>
+            <th>departamento_id</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>7369</td>
+            <td>Smith</td>
+            <td>Ordenanza</td>
+            <td>7902</td>
+            <td>2000-12-17</td>
+            <td>800.0</td>
+            <td>None</td>
+            <td>20</td>
+        </tr>
+        <tr>
+            <td>7499</td>
+            <td>Allen</td>
+            <td>Vendedor</td>
+            <td>7698</td>
+            <td>2001-02-20</td>
+            <td>1600.0</td>
+            <td>300.0</td>
+            <td>30</td>
+        </tr>
+        <tr>
+            <td>7521</td>
+            <td>Ward</td>
+            <td>Vendedor</td>
+            <td>7698</td>
+            <td>2001-02-22</td>
+            <td>1250.0</td>
+            <td>500.0</td>
+            <td>30</td>
+        </tr>
+        <tr>
+            <td>7566</td>
+            <td>Jones</td>
+            <td>Directivo</td>
+            <td>7839</td>
+            <td>2001-04-02</td>
+            <td>2975.0</td>
+            <td>None</td>
+            <td>20</td>
+        </tr>
+        <tr>
+            <td>7654</td>
+            <td>Martin</td>
+            <td>Vendedor</td>
+            <td>7698</td>
+            <td>2001-09-28</td>
+            <td>1250.0</td>
+            <td>1400.0</td>
+            <td>30</td>
+        </tr>
+        <tr>
+            <td>7698</td>
+            <td>Blake</td>
+            <td>Directivo</td>
+            <td>7839</td>
+            <td>2001-05-01</td>
+            <td>2850.0</td>
+            <td>None</td>
+            <td>30</td>
+        </tr>
+        <tr>
+            <td>7782</td>
+            <td>Clark</td>
+            <td>Directivo</td>
+            <td>7839</td>
+            <td>2001-06-09</td>
+            <td>2450.0</td>
+            <td>None</td>
+            <td>10</td>
+        </tr>
+        <tr>
+            <td>7844</td>
+            <td>Turner</td>
+            <td>Vendedor</td>
+            <td>7698</td>
+            <td>2001-09-08</td>
+            <td>1500.0</td>
+            <td>0.0</td>
+            <td>30</td>
+        </tr>
+        <tr>
+            <td>7876</td>
+            <td>Adams</td>
+            <td>Ordenanza</td>
+            <td>7788</td>
+            <td>2003-01-12</td>
+            <td>1100.0</td>
+            <td>None</td>
+            <td>20</td>
+        </tr>
+        <tr>
+            <td>7900</td>
+            <td>James</td>
+            <td>Ordenanza</td>
+            <td>7698</td>
+            <td>2001-12-03</td>
+            <td>950.0</td>
+            <td>None</td>
+            <td>30</td>
+        </tr>
+    </tbody>
+</table>
+<span style="font-style:italic;text-align:center;">Truncated to <a href="https://jupysql.ploomber.io/en/latest/api/configuration.html#displaylimit">displaylimit</a> of 10.</span></div></div>
+</div>
+</section>
+<section id="el-operador-logico-in-y-busqueda-aproximada">
+<h3>El operador lógico IN y búsqueda aproximada<a class="headerlink" href="#el-operador-logico-in-y-busqueda-aproximada" title="Link to this heading">#</a></h3>
+<p>Ejemplo. Uso del operador IN para mostrar todas las filas de los empleados que tengan empleo de Vendedor, Directivo u Ordenanza</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT *
+FROM Empleados
+WHERE empleo IN (&#39;Vendedor&#39;, &#39;Directivo&#39;, &#39;Ordenanza&#39;);
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">11 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>nombre</th>
+            <th>empleo</th>
+            <th>jefe</th>
+            <th>fecha_entrada</th>
+            <th>sueldo</th>
+            <th>complemento</th>
+            <th>departamento_id</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>7369</td>
+            <td>Smith</td>
+            <td>Ordenanza</td>
+            <td>7902</td>
+            <td>2000-12-17</td>
+            <td>800.0</td>
+            <td>None</td>
+            <td>20</td>
+        </tr>
+        <tr>
+            <td>7499</td>
+            <td>Allen</td>
+            <td>Vendedor</td>
+            <td>7698</td>
+            <td>2001-02-20</td>
+            <td>1600.0</td>
+            <td>300.0</td>
+            <td>30</td>
+        </tr>
+        <tr>
+            <td>7521</td>
+            <td>Ward</td>
+            <td>Vendedor</td>
+            <td>7698</td>
+            <td>2001-02-22</td>
+            <td>1250.0</td>
+            <td>500.0</td>
+            <td>30</td>
+        </tr>
+        <tr>
+            <td>7566</td>
+            <td>Jones</td>
+            <td>Directivo</td>
+            <td>7839</td>
+            <td>2001-04-02</td>
+            <td>2975.0</td>
+            <td>None</td>
+            <td>20</td>
+        </tr>
+        <tr>
+            <td>7654</td>
+            <td>Martin</td>
+            <td>Vendedor</td>
+            <td>7698</td>
+            <td>2001-09-28</td>
+            <td>1250.0</td>
+            <td>1400.0</td>
+            <td>30</td>
+        </tr>
+        <tr>
+            <td>7698</td>
+            <td>Blake</td>
+            <td>Directivo</td>
+            <td>7839</td>
+            <td>2001-05-01</td>
+            <td>2850.0</td>
+            <td>None</td>
+            <td>30</td>
+        </tr>
+        <tr>
+            <td>7782</td>
+            <td>Clark</td>
+            <td>Directivo</td>
+            <td>7839</td>
+            <td>2001-06-09</td>
+            <td>2450.0</td>
+            <td>None</td>
+            <td>10</td>
+        </tr>
+        <tr>
+            <td>7844</td>
+            <td>Turner</td>
+            <td>Vendedor</td>
+            <td>7698</td>
+            <td>2001-09-08</td>
+            <td>1500.0</td>
+            <td>0.0</td>
+            <td>30</td>
+        </tr>
+        <tr>
+            <td>7876</td>
+            <td>Adams</td>
+            <td>Ordenanza</td>
+            <td>7788</td>
+            <td>2003-01-12</td>
+            <td>1100.0</td>
+            <td>None</td>
+            <td>20</td>
+        </tr>
+        <tr>
+            <td>7900</td>
+            <td>James</td>
+            <td>Ordenanza</td>
+            <td>7698</td>
+            <td>2001-12-03</td>
+            <td>950.0</td>
+            <td>None</td>
+            <td>30</td>
+        </tr>
+    </tbody>
+</table>
+<span style="font-style:italic;text-align:center;">Truncated to <a href="https://jupysql.ploomber.io/en/latest/api/configuration.html#displaylimit">displaylimit</a> of 10.</span></div></div>
+</div>
+<p>Ejemplo. Mostrar todas las filas de los empleados que no tienen como empleo Vendedor, Directivo u Ordenanza</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT *
+FROM Empleados
+WHERE empleo NOT IN (&#39;Vendedor&#39;, &#39;Directivo&#39;, &#39;Ordenanza&#39;);
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">3 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>nombre</th>
+            <th>empleo</th>
+            <th>jefe</th>
+            <th>fecha_entrada</th>
+            <th>sueldo</th>
+            <th>complemento</th>
+            <th>departamento_id</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>7788</td>
+            <td>Scott</td>
+            <td>Analista</td>
+            <td>7566</td>
+            <td>2002-12-09</td>
+            <td>3000.0</td>
+            <td>None</td>
+            <td>20</td>
+        </tr>
+        <tr>
+            <td>7839</td>
+            <td>King</td>
+            <td>Director</td>
+            <td>None</td>
+            <td>2001-11-17</td>
+            <td>5000.0</td>
+            <td>None</td>
+            <td>10</td>
+        </tr>
+        <tr>
+            <td>7902</td>
+            <td>Ford</td>
+            <td>Analista</td>
+            <td>7566</td>
+            <td>2001-12-03</td>
+            <td>3000.0</td>
+            <td>None</td>
+            <td>20</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+<p>Ejemplo. Mostrar todas las filas de los empleados que tienen algún empleo de dirección</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT *
+FROM Empleados
+WHERE empleo LIKE &#39;%Director%&#39;;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">1 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>nombre</th>
+            <th>empleo</th>
+            <th>jefe</th>
+            <th>fecha_entrada</th>
+            <th>sueldo</th>
+            <th>complemento</th>
+            <th>departamento_id</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>7839</td>
+            <td>King</td>
+            <td>Director</td>
+            <td>None</td>
+            <td>2001-11-17</td>
+            <td>5000.0</td>
+            <td>None</td>
+            <td>10</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+</section>
+<section id="manejo-de-nulos">
+<h3>Manejo de nulos<a class="headerlink" href="#manejo-de-nulos" title="Link to this heading">#</a></h3>
+<p>Ejemplo. Mostrar las filas de todos los empleados que no tienen datos de complemento</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT *
+FROM Empleados
+WHERE complemento IS NULL;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">10 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>nombre</th>
+            <th>empleo</th>
+            <th>jefe</th>
+            <th>fecha_entrada</th>
+            <th>sueldo</th>
+            <th>complemento</th>
+            <th>departamento_id</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>7369</td>
+            <td>Smith</td>
+            <td>Ordenanza</td>
+            <td>7902</td>
+            <td>2000-12-17</td>
+            <td>800.0</td>
+            <td>None</td>
+            <td>20</td>
+        </tr>
+        <tr>
+            <td>7566</td>
+            <td>Jones</td>
+            <td>Directivo</td>
+            <td>7839</td>
+            <td>2001-04-02</td>
+            <td>2975.0</td>
+            <td>None</td>
+            <td>20</td>
+        </tr>
+        <tr>
+            <td>7698</td>
+            <td>Blake</td>
+            <td>Directivo</td>
+            <td>7839</td>
+            <td>2001-05-01</td>
+            <td>2850.0</td>
+            <td>None</td>
+            <td>30</td>
+        </tr>
+        <tr>
+            <td>7782</td>
+            <td>Clark</td>
+            <td>Directivo</td>
+            <td>7839</td>
+            <td>2001-06-09</td>
+            <td>2450.0</td>
+            <td>None</td>
+            <td>10</td>
+        </tr>
+        <tr>
+            <td>7788</td>
+            <td>Scott</td>
+            <td>Analista</td>
+            <td>7566</td>
+            <td>2002-12-09</td>
+            <td>3000.0</td>
+            <td>None</td>
+            <td>20</td>
+        </tr>
+        <tr>
+            <td>7839</td>
+            <td>King</td>
+            <td>Director</td>
+            <td>None</td>
+            <td>2001-11-17</td>
+            <td>5000.0</td>
+            <td>None</td>
+            <td>10</td>
+        </tr>
+        <tr>
+            <td>7876</td>
+            <td>Adams</td>
+            <td>Ordenanza</td>
+            <td>7788</td>
+            <td>2003-01-12</td>
+            <td>1100.0</td>
+            <td>None</td>
+            <td>20</td>
+        </tr>
+        <tr>
+            <td>7900</td>
+            <td>James</td>
+            <td>Ordenanza</td>
+            <td>7698</td>
+            <td>2001-12-03</td>
+            <td>950.0</td>
+            <td>None</td>
+            <td>30</td>
+        </tr>
+        <tr>
+            <td>7902</td>
+            <td>Ford</td>
+            <td>Analista</td>
+            <td>7566</td>
+            <td>2001-12-03</td>
+            <td>3000.0</td>
+            <td>None</td>
+            <td>20</td>
+        </tr>
+        <tr>
+            <td>7934</td>
+            <td>Miller</td>
+            <td>Ordenanza</td>
+            <td>7782</td>
+            <td>2002-01-23</td>
+            <td>1300.0</td>
+            <td>None</td>
+            <td>10</td>
+        </tr>
+    </tbody>
+</table>
+<span style="font-style:italic;text-align:center;">Truncated to <a href="https://jupysql.ploomber.io/en/latest/api/configuration.html#displaylimit">displaylimit</a> of 10.</span></div></div>
+</div>
+<p>Ejemplo. Mostrar las filas de todos los empleados que tienen datos de complemento</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT *
+FROM Empleados
+WHERE complemento IS NOT NULL;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">4 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>nombre</th>
+            <th>empleo</th>
+            <th>jefe</th>
+            <th>fecha_entrada</th>
+            <th>sueldo</th>
+            <th>complemento</th>
+            <th>departamento_id</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>7499</td>
+            <td>Allen</td>
+            <td>Vendedor</td>
+            <td>7698</td>
+            <td>2001-02-20</td>
+            <td>1600.0</td>
+            <td>300.0</td>
+            <td>30</td>
+        </tr>
+        <tr>
+            <td>7521</td>
+            <td>Ward</td>
+            <td>Vendedor</td>
+            <td>7698</td>
+            <td>2001-02-22</td>
+            <td>1250.0</td>
+            <td>500.0</td>
+            <td>30</td>
+        </tr>
+        <tr>
+            <td>7654</td>
+            <td>Martin</td>
+            <td>Vendedor</td>
+            <td>7698</td>
+            <td>2001-09-28</td>
+            <td>1250.0</td>
+            <td>1400.0</td>
+            <td>30</td>
+        </tr>
+        <tr>
+            <td>7844</td>
+            <td>Turner</td>
+            <td>Vendedor</td>
+            <td>7698</td>
+            <td>2001-09-08</td>
+            <td>1500.0</td>
+            <td>0.0</td>
+            <td>30</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+</section>
+<section id="consultas-de-un-rango-de-valores">
+<h3>Consultas de un rango de valores<a class="headerlink" href="#consultas-de-un-rango-de-valores" title="Link to this heading">#</a></h3>
+<p>Ejemplo. Mostrar las filas de todos los empleados que tienen sueldo mayor o igual que 2000 y menor o igual que 3000</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT *
+FROM Empleados
+WHERE sueldo &gt;= 2000 AND sueldo &lt;= 3000;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">5 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>nombre</th>
+            <th>empleo</th>
+            <th>jefe</th>
+            <th>fecha_entrada</th>
+            <th>sueldo</th>
+            <th>complemento</th>
+            <th>departamento_id</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>7566</td>
+            <td>Jones</td>
+            <td>Directivo</td>
+            <td>7839</td>
+            <td>2001-04-02</td>
+            <td>2975.0</td>
+            <td>None</td>
+            <td>20</td>
+        </tr>
+        <tr>
+            <td>7698</td>
+            <td>Blake</td>
+            <td>Directivo</td>
+            <td>7839</td>
+            <td>2001-05-01</td>
+            <td>2850.0</td>
+            <td>None</td>
+            <td>30</td>
+        </tr>
+        <tr>
+            <td>7782</td>
+            <td>Clark</td>
+            <td>Directivo</td>
+            <td>7839</td>
+            <td>2001-06-09</td>
+            <td>2450.0</td>
+            <td>None</td>
+            <td>10</td>
+        </tr>
+        <tr>
+            <td>7788</td>
+            <td>Scott</td>
+            <td>Analista</td>
+            <td>7566</td>
+            <td>2002-12-09</td>
+            <td>3000.0</td>
+            <td>None</td>
+            <td>20</td>
+        </tr>
+        <tr>
+            <td>7902</td>
+            <td>Ford</td>
+            <td>Analista</td>
+            <td>7566</td>
+            <td>2001-12-03</td>
+            <td>3000.0</td>
+            <td>None</td>
+            <td>20</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+<p>Ejemplo. Mostrar las filas de todos los empleados que tienen el sueldo comprendido entre 2000 y 3000</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT *
+FROM Empleados
+WHERE sueldo BETWEEN 2000 AND 3000;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">5 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>nombre</th>
+            <th>empleo</th>
+            <th>jefe</th>
+            <th>fecha_entrada</th>
+            <th>sueldo</th>
+            <th>complemento</th>
+            <th>departamento_id</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>7566</td>
+            <td>Jones</td>
+            <td>Directivo</td>
+            <td>7839</td>
+            <td>2001-04-02</td>
+            <td>2975.0</td>
+            <td>None</td>
+            <td>20</td>
+        </tr>
+        <tr>
+            <td>7698</td>
+            <td>Blake</td>
+            <td>Directivo</td>
+            <td>7839</td>
+            <td>2001-05-01</td>
+            <td>2850.0</td>
+            <td>None</td>
+            <td>30</td>
+        </tr>
+        <tr>
+            <td>7782</td>
+            <td>Clark</td>
+            <td>Directivo</td>
+            <td>7839</td>
+            <td>2001-06-09</td>
+            <td>2450.0</td>
+            <td>None</td>
+            <td>10</td>
+        </tr>
+        <tr>
+            <td>7788</td>
+            <td>Scott</td>
+            <td>Analista</td>
+            <td>7566</td>
+            <td>2002-12-09</td>
+            <td>3000.0</td>
+            <td>None</td>
+            <td>20</td>
+        </tr>
+        <tr>
+            <td>7902</td>
+            <td>Ford</td>
+            <td>Analista</td>
+            <td>7566</td>
+            <td>2001-12-03</td>
+            <td>3000.0</td>
+            <td>None</td>
+            <td>20</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+</section>
+<section id="uso-de-expresiones-en-select">
+<h3>Uso de expresiones en SELECT<a class="headerlink" href="#uso-de-expresiones-en-select" title="Link to this heading">#</a></h3>
+<p>Ejemplo. Mostrar nombre y la suma de sueldo y complemento de todos los empleados</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT nombre, (sueldo + complemento) AS sueldo_total
+FROM Empleados;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">14 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>nombre</th>
+            <th>sueldo_total</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Smith</td>
+            <td>None</td>
+        </tr>
+        <tr>
+            <td>Allen</td>
+            <td>1900.0</td>
+        </tr>
+        <tr>
+            <td>Ward</td>
+            <td>1750.0</td>
+        </tr>
+        <tr>
+            <td>Jones</td>
+            <td>None</td>
+        </tr>
+        <tr>
+            <td>Martin</td>
+            <td>2650.0</td>
+        </tr>
+        <tr>
+            <td>Blake</td>
+            <td>None</td>
+        </tr>
+        <tr>
+            <td>Clark</td>
+            <td>None</td>
+        </tr>
+        <tr>
+            <td>Scott</td>
+            <td>None</td>
+        </tr>
+        <tr>
+            <td>King</td>
+            <td>None</td>
+        </tr>
+        <tr>
+            <td>Turner</td>
+            <td>1500.0</td>
+        </tr>
+    </tbody>
+</table>
+<span style="font-style:italic;text-align:center;">Truncated to <a href="https://jupysql.ploomber.io/en/latest/api/configuration.html#displaylimit">displaylimit</a> of 10.</span></div></div>
+</div>
+<blockquote>
+<div><p><strong>NOTA</strong></p>
+<p>La aparición de un valor NULL en una operación aritmética hace que el resultado sea NULL. Por ejemplo, <code class="docutils literal notranslate"><span class="pre">NULL</span> <span class="pre">+</span> <span class="pre">valor</span> <span class="pre">=</span> <span class="pre">NULL</span></code></p>
+</div></blockquote>
+<p>Ejemplo. Mostrar nombre, sueldo, complemento, sueldo y complemento de todos los empleados</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT nombre, sueldo, complemento, (sueldo + complemento) AS sueldo_total
+FROM Empleados;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">14 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>nombre</th>
+            <th>sueldo</th>
+            <th>complemento</th>
+            <th>sueldo_total</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Smith</td>
+            <td>800.0</td>
+            <td>None</td>
+            <td>None</td>
+        </tr>
+        <tr>
+            <td>Allen</td>
+            <td>1600.0</td>
+            <td>300.0</td>
+            <td>1900.0</td>
+        </tr>
+        <tr>
+            <td>Ward</td>
+            <td>1250.0</td>
+            <td>500.0</td>
+            <td>1750.0</td>
+        </tr>
+        <tr>
+            <td>Jones</td>
+            <td>2975.0</td>
+            <td>None</td>
+            <td>None</td>
+        </tr>
+        <tr>
+            <td>Martin</td>
+            <td>1250.0</td>
+            <td>1400.0</td>
+            <td>2650.0</td>
+        </tr>
+        <tr>
+            <td>Blake</td>
+            <td>2850.0</td>
+            <td>None</td>
+            <td>None</td>
+        </tr>
+        <tr>
+            <td>Clark</td>
+            <td>2450.0</td>
+            <td>None</td>
+            <td>None</td>
+        </tr>
+        <tr>
+            <td>Scott</td>
+            <td>3000.0</td>
+            <td>None</td>
+            <td>None</td>
+        </tr>
+        <tr>
+            <td>King</td>
+            <td>5000.0</td>
+            <td>None</td>
+            <td>None</td>
+        </tr>
+        <tr>
+            <td>Turner</td>
+            <td>1500.0</td>
+            <td>0.0</td>
+            <td>1500.0</td>
+        </tr>
+    </tbody>
+</table>
+<span style="font-style:italic;text-align:center;">Truncated to <a href="https://jupysql.ploomber.io/en/latest/api/configuration.html#displaylimit">displaylimit</a> of 10.</span></div></div>
+</div>
+<blockquote>
+<div><p><strong>NOTA</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">COALESCE</span></code> es una función que permite asociar un valor a una columna cuando es <code class="docutils literal notranslate"><span class="pre">NULL</span></code>. Por ejemplo, <code class="docutils literal notranslate"><span class="pre">COALESCE(complemento,</span> <span class="pre">0)</span></code> indica que <code class="docutils literal notranslate"><span class="pre">complemento</span></code> tome el valor <code class="docutils literal notranslate"><span class="pre">0</span></code> cuando tenga un valor de <code class="docutils literal notranslate"><span class="pre">NULL</span></code>.</p>
+</div></blockquote>
+<p>Ejemplo. Mostrar nombre, sueldo, complemento, sueldo y complemento de todos los empleados considerando como 0 los complementos nulos</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT nombre, sueldo, complemento, (sueldo + COALESCE(complemento, 0)) AS sueldo_total
+FROM Empleados;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">14 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>nombre</th>
+            <th>sueldo</th>
+            <th>complemento</th>
+            <th>sueldo_total</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Smith</td>
+            <td>800.0</td>
+            <td>None</td>
+            <td>800.0</td>
+        </tr>
+        <tr>
+            <td>Allen</td>
+            <td>1600.0</td>
+            <td>300.0</td>
+            <td>1900.0</td>
+        </tr>
+        <tr>
+            <td>Ward</td>
+            <td>1250.0</td>
+            <td>500.0</td>
+            <td>1750.0</td>
+        </tr>
+        <tr>
+            <td>Jones</td>
+            <td>2975.0</td>
+            <td>None</td>
+            <td>2975.0</td>
+        </tr>
+        <tr>
+            <td>Martin</td>
+            <td>1250.0</td>
+            <td>1400.0</td>
+            <td>2650.0</td>
+        </tr>
+        <tr>
+            <td>Blake</td>
+            <td>2850.0</td>
+            <td>None</td>
+            <td>2850.0</td>
+        </tr>
+        <tr>
+            <td>Clark</td>
+            <td>2450.0</td>
+            <td>None</td>
+            <td>2450.0</td>
+        </tr>
+        <tr>
+            <td>Scott</td>
+            <td>3000.0</td>
+            <td>None</td>
+            <td>3000.0</td>
+        </tr>
+        <tr>
+            <td>King</td>
+            <td>5000.0</td>
+            <td>None</td>
+            <td>5000.0</td>
+        </tr>
+        <tr>
+            <td>Turner</td>
+            <td>1500.0</td>
+            <td>0.0</td>
+            <td>1500.0</td>
+        </tr>
+    </tbody>
+</table>
+<span style="font-style:italic;text-align:center;">Truncated to <a href="https://jupysql.ploomber.io/en/latest/api/configuration.html#displaylimit">displaylimit</a> of 10.</span></div></div>
+</div>
+</section>
+<section id="renombrado-de-columnas">
+<h3>Renombrado de columnas<a class="headerlink" href="#renombrado-de-columnas" title="Link to this heading">#</a></h3>
+<p>Ejemplo. Mostrar nombre, sueldo, complemento y sueldo total de todos los empleados considerando como 0 los complementos nulos.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT nombre, sueldo, complemento, (sueldo + COALESCE(complemento, 0)) AS sueldo_total
+FROM Empleados;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">14 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>nombre</th>
+            <th>sueldo</th>
+            <th>complemento</th>
+            <th>sueldo_total</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Smith</td>
+            <td>800.0</td>
+            <td>None</td>
+            <td>800.0</td>
+        </tr>
+        <tr>
+            <td>Allen</td>
+            <td>1600.0</td>
+            <td>300.0</td>
+            <td>1900.0</td>
+        </tr>
+        <tr>
+            <td>Ward</td>
+            <td>1250.0</td>
+            <td>500.0</td>
+            <td>1750.0</td>
+        </tr>
+        <tr>
+            <td>Jones</td>
+            <td>2975.0</td>
+            <td>None</td>
+            <td>2975.0</td>
+        </tr>
+        <tr>
+            <td>Martin</td>
+            <td>1250.0</td>
+            <td>1400.0</td>
+            <td>2650.0</td>
+        </tr>
+        <tr>
+            <td>Blake</td>
+            <td>2850.0</td>
+            <td>None</td>
+            <td>2850.0</td>
+        </tr>
+        <tr>
+            <td>Clark</td>
+            <td>2450.0</td>
+            <td>None</td>
+            <td>2450.0</td>
+        </tr>
+        <tr>
+            <td>Scott</td>
+            <td>3000.0</td>
+            <td>None</td>
+            <td>3000.0</td>
+        </tr>
+        <tr>
+            <td>King</td>
+            <td>5000.0</td>
+            <td>None</td>
+            <td>5000.0</td>
+        </tr>
+        <tr>
+            <td>Turner</td>
+            <td>1500.0</td>
+            <td>0.0</td>
+            <td>1500.0</td>
+        </tr>
+    </tbody>
+</table>
+<span style="font-style:italic;text-align:center;">Truncated to <a href="https://jupysql.ploomber.io/en/latest/api/configuration.html#displaylimit">displaylimit</a> of 10.</span></div></div>
+</div>
+</section>
+</section>
+<section id="manejo-de-fechas">
+<h2>Manejo de fechas<a class="headerlink" href="#manejo-de-fechas" title="Link to this heading">#</a></h2>
+<p>Ejemplo. Mostrar todas las filas de los empleados que se incorporaron a partir del 1 de enero de 2002</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT *
+FROM Empleados
+WHERE fecha_entrada &gt;= &#39;2002-01-01&#39;;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">3 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>nombre</th>
+            <th>empleo</th>
+            <th>jefe</th>
+            <th>fecha_entrada</th>
+            <th>sueldo</th>
+            <th>complemento</th>
+            <th>departamento_id</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>7788</td>
+            <td>Scott</td>
+            <td>Analista</td>
+            <td>7566</td>
+            <td>2002-12-09</td>
+            <td>3000.0</td>
+            <td>None</td>
+            <td>20</td>
+        </tr>
+        <tr>
+            <td>7876</td>
+            <td>Adams</td>
+            <td>Ordenanza</td>
+            <td>7788</td>
+            <td>2003-01-12</td>
+            <td>1100.0</td>
+            <td>None</td>
+            <td>20</td>
+        </tr>
+        <tr>
+            <td>7934</td>
+            <td>Miller</td>
+            <td>Ordenanza</td>
+            <td>7782</td>
+            <td>2002-01-23</td>
+            <td>1300.0</td>
+            <td>None</td>
+            <td>10</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+<section id="funciones-para-el-manejo-de-fechas">
+<h3>Funciones para el manejo de fechas<a class="headerlink" href="#funciones-para-el-manejo-de-fechas" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p><strong>NOTA</strong></p>
+<p>La función <code class="docutils literal notranslate"><span class="pre">YEAR()</span></code> aplicada a una fecha devuelve el año de la fecha en formato numérico.</p>
+</div></blockquote>
+<p>Ejemplo. Mostrar todas las filas de los empleados cuya fecha de entrada no sea del año 2000</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT *
+FROM Empleados
+WHERE YEAR(fecha_entrada) &lt;&gt; 2000;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">13 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>nombre</th>
+            <th>empleo</th>
+            <th>jefe</th>
+            <th>fecha_entrada</th>
+            <th>sueldo</th>
+            <th>complemento</th>
+            <th>departamento_id</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>7499</td>
+            <td>Allen</td>
+            <td>Vendedor</td>
+            <td>7698</td>
+            <td>2001-02-20</td>
+            <td>1600.0</td>
+            <td>300.0</td>
+            <td>30</td>
+        </tr>
+        <tr>
+            <td>7521</td>
+            <td>Ward</td>
+            <td>Vendedor</td>
+            <td>7698</td>
+            <td>2001-02-22</td>
+            <td>1250.0</td>
+            <td>500.0</td>
+            <td>30</td>
+        </tr>
+        <tr>
+            <td>7566</td>
+            <td>Jones</td>
+            <td>Directivo</td>
+            <td>7839</td>
+            <td>2001-04-02</td>
+            <td>2975.0</td>
+            <td>None</td>
+            <td>20</td>
+        </tr>
+        <tr>
+            <td>7654</td>
+            <td>Martin</td>
+            <td>Vendedor</td>
+            <td>7698</td>
+            <td>2001-09-28</td>
+            <td>1250.0</td>
+            <td>1400.0</td>
+            <td>30</td>
+        </tr>
+        <tr>
+            <td>7698</td>
+            <td>Blake</td>
+            <td>Directivo</td>
+            <td>7839</td>
+            <td>2001-05-01</td>
+            <td>2850.0</td>
+            <td>None</td>
+            <td>30</td>
+        </tr>
+        <tr>
+            <td>7782</td>
+            <td>Clark</td>
+            <td>Directivo</td>
+            <td>7839</td>
+            <td>2001-06-09</td>
+            <td>2450.0</td>
+            <td>None</td>
+            <td>10</td>
+        </tr>
+        <tr>
+            <td>7788</td>
+            <td>Scott</td>
+            <td>Analista</td>
+            <td>7566</td>
+            <td>2002-12-09</td>
+            <td>3000.0</td>
+            <td>None</td>
+            <td>20</td>
+        </tr>
+        <tr>
+            <td>7839</td>
+            <td>King</td>
+            <td>Director</td>
+            <td>None</td>
+            <td>2001-11-17</td>
+            <td>5000.0</td>
+            <td>None</td>
+            <td>10</td>
+        </tr>
+        <tr>
+            <td>7844</td>
+            <td>Turner</td>
+            <td>Vendedor</td>
+            <td>7698</td>
+            <td>2001-09-08</td>
+            <td>1500.0</td>
+            <td>0.0</td>
+            <td>30</td>
+        </tr>
+        <tr>
+            <td>7876</td>
+            <td>Adams</td>
+            <td>Ordenanza</td>
+            <td>7788</td>
+            <td>2003-01-12</td>
+            <td>1100.0</td>
+            <td>None</td>
+            <td>20</td>
+        </tr>
+    </tbody>
+</table>
+<span style="font-style:italic;text-align:center;">Truncated to <a href="https://jupysql.ploomber.io/en/latest/api/configuration.html#displaylimit">displaylimit</a> of 10.</span></div></div>
+</div>
+<p>Ejemplo. Mostrar todas las filas de los empleados cuya fecha de entrada no sea del año 2000 ni 2001</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT *
+FROM Empleados
+WHERE YEAR(fecha_entrada) NOT IN (2000, 2001);
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">3 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>nombre</th>
+            <th>empleo</th>
+            <th>jefe</th>
+            <th>fecha_entrada</th>
+            <th>sueldo</th>
+            <th>complemento</th>
+            <th>departamento_id</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>7788</td>
+            <td>Scott</td>
+            <td>Analista</td>
+            <td>7566</td>
+            <td>2002-12-09</td>
+            <td>3000.0</td>
+            <td>None</td>
+            <td>20</td>
+        </tr>
+        <tr>
+            <td>7876</td>
+            <td>Adams</td>
+            <td>Ordenanza</td>
+            <td>7788</td>
+            <td>2003-01-12</td>
+            <td>1100.0</td>
+            <td>None</td>
+            <td>20</td>
+        </tr>
+        <tr>
+            <td>7934</td>
+            <td>Miller</td>
+            <td>Ordenanza</td>
+            <td>7782</td>
+            <td>2002-01-23</td>
+            <td>1300.0</td>
+            <td>None</td>
+            <td>10</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+<blockquote>
+<div><p><strong>NOTA</strong></p>
+<p>La función <code class="docutils literal notranslate"><span class="pre">CURDATE()</span></code> devuelve la fecha actual.</p>
+</div></blockquote>
+<p>Ejemplo. Mostrar nombre, empleo, fecha actual, fecha de entrada y diferencia entre fecha actual y fecha de entrada</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT nombre, empleo, CURDATE() AS fechaActual, fecha_entrada, DATEDIFF(CURDATE(), fecha_entrada) AS antiguedad
+FROM Empleados;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">14 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>nombre</th>
+            <th>empleo</th>
+            <th>fechaActual</th>
+            <th>fecha_entrada</th>
+            <th>antiguedad</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Smith</td>
+            <td>Ordenanza</td>
+            <td>2025-03-18</td>
+            <td>2000-12-17</td>
+            <td>8857</td>
+        </tr>
+        <tr>
+            <td>Allen</td>
+            <td>Vendedor</td>
+            <td>2025-03-18</td>
+            <td>2001-02-20</td>
+            <td>8792</td>
+        </tr>
+        <tr>
+            <td>Ward</td>
+            <td>Vendedor</td>
+            <td>2025-03-18</td>
+            <td>2001-02-22</td>
+            <td>8790</td>
+        </tr>
+        <tr>
+            <td>Jones</td>
+            <td>Directivo</td>
+            <td>2025-03-18</td>
+            <td>2001-04-02</td>
+            <td>8751</td>
+        </tr>
+        <tr>
+            <td>Martin</td>
+            <td>Vendedor</td>
+            <td>2025-03-18</td>
+            <td>2001-09-28</td>
+            <td>8572</td>
+        </tr>
+        <tr>
+            <td>Blake</td>
+            <td>Directivo</td>
+            <td>2025-03-18</td>
+            <td>2001-05-01</td>
+            <td>8722</td>
+        </tr>
+        <tr>
+            <td>Clark</td>
+            <td>Directivo</td>
+            <td>2025-03-18</td>
+            <td>2001-06-09</td>
+            <td>8683</td>
+        </tr>
+        <tr>
+            <td>Scott</td>
+            <td>Analista</td>
+            <td>2025-03-18</td>
+            <td>2002-12-09</td>
+            <td>8135</td>
+        </tr>
+        <tr>
+            <td>King</td>
+            <td>Director</td>
+            <td>2025-03-18</td>
+            <td>2001-11-17</td>
+            <td>8522</td>
+        </tr>
+        <tr>
+            <td>Turner</td>
+            <td>Vendedor</td>
+            <td>2025-03-18</td>
+            <td>2001-09-08</td>
+            <td>8592</td>
+        </tr>
+    </tbody>
+</table>
+<span style="font-style:italic;text-align:center;">Truncated to <a href="https://jupysql.ploomber.io/en/latest/api/configuration.html#displaylimit">displaylimit</a> of 10.</span></div></div>
+</div>
+<blockquote>
+<div><p><strong>NOTA</strong></p>
+<p>La diferencia aritmética entre <code class="docutils literal notranslate"><span class="pre">CURDATE()</span></code> y la fecha de entrada devuelve un resultado anómalo. Usar en su lugar la función <code class="docutils literal notranslate"><span class="pre">DATEDIFF()</span></code>.</p>
+<p>La función <code class="docutils literal notranslate"><span class="pre">DATEDIFF()</span></code> devuelve la diferencia en días entre dos fechas.</p>
+</div></blockquote>
+<p>Ejemplo. Mostrar nombre, empleo y antigüedad en días de todos los empleados.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT nombre, empleo, DATEDIFF(CURDATE(), fecha_entrada) AS antiguedad
+FROM Empleados;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">14 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>nombre</th>
+            <th>empleo</th>
+            <th>antiguedad</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Smith</td>
+            <td>Ordenanza</td>
+            <td>8857</td>
+        </tr>
+        <tr>
+            <td>Allen</td>
+            <td>Vendedor</td>
+            <td>8792</td>
+        </tr>
+        <tr>
+            <td>Ward</td>
+            <td>Vendedor</td>
+            <td>8790</td>
+        </tr>
+        <tr>
+            <td>Jones</td>
+            <td>Directivo</td>
+            <td>8751</td>
+        </tr>
+        <tr>
+            <td>Martin</td>
+            <td>Vendedor</td>
+            <td>8572</td>
+        </tr>
+        <tr>
+            <td>Blake</td>
+            <td>Directivo</td>
+            <td>8722</td>
+        </tr>
+        <tr>
+            <td>Clark</td>
+            <td>Directivo</td>
+            <td>8683</td>
+        </tr>
+        <tr>
+            <td>Scott</td>
+            <td>Analista</td>
+            <td>8135</td>
+        </tr>
+        <tr>
+            <td>King</td>
+            <td>Director</td>
+            <td>8522</td>
+        </tr>
+        <tr>
+            <td>Turner</td>
+            <td>Vendedor</td>
+            <td>8592</td>
+        </tr>
+    </tbody>
+</table>
+<span style="font-style:italic;text-align:center;">Truncated to <a href="https://jupysql.ploomber.io/en/latest/api/configuration.html#displaylimit">displaylimit</a> of 10.</span></div></div>
+</div>
+<blockquote>
+<div><p><strong>NOTA</strong></p>
+<p>La función <code class="docutils literal notranslate"><span class="pre">DATE_FORMAT()</span></code> permite dar formato a un valor de tipo fecha. El formato se define en una cadena aplicando unos códigos de formato como los de la tabla siguiente.</p>
+</div></blockquote>
+</section>
+<section id="codigos-de-formato-habituales-para-datediff">
+<h3>Códigos de formato habituales para <code class="docutils literal notranslate"><span class="pre">DATEDIFF()</span></code><a class="headerlink" href="#codigos-de-formato-habituales-para-datediff" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Código de formato</p></th>
+<th class="head"><p>Descripción</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%d</span></code></p></td>
+<td><p>Día del mes con dos dígitos</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%e</span></code></p></td>
+<td><p>Día del mes</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%a</span></code></p></td>
+<td><p>Nombre abreviado del día de la semana (Sun-Sat)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%W</span></code></p></td>
+<td><p>Nombre del día de la semana (Sunday-Saturday)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%b</span></code></p></td>
+<td><p>Nombre abreviado del mes (Jan-Dec)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%M</span></code></p></td>
+<td><p>Nombre del mes (January-December)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%y</span></code></p></td>
+<td><p>Año con dos dígitos</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%Y</span></code></p></td>
+<td><p>Año con cuatro dígitos</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Ejemplo. Mostrar el nombre, empleo y feha de entrada de todos los empleados. La fecha de entrada se presentará con el día con dos dígitos, el mes abreviado y el año con cuatro dígitos.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT nombre, empleo, DATE_FORMAT(fecha_entrada, &#39;%d-%b-%Y&#39;) AS fecha_entrada
+FROM Empleados;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">14 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>nombre</th>
+            <th>empleo</th>
+            <th>fecha_entrada</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Smith</td>
+            <td>Ordenanza</td>
+            <td>17-Dec-2000</td>
+        </tr>
+        <tr>
+            <td>Allen</td>
+            <td>Vendedor</td>
+            <td>20-Feb-2001</td>
+        </tr>
+        <tr>
+            <td>Ward</td>
+            <td>Vendedor</td>
+            <td>22-Feb-2001</td>
+        </tr>
+        <tr>
+            <td>Jones</td>
+            <td>Directivo</td>
+            <td>02-Apr-2001</td>
+        </tr>
+        <tr>
+            <td>Martin</td>
+            <td>Vendedor</td>
+            <td>28-Sep-2001</td>
+        </tr>
+        <tr>
+            <td>Blake</td>
+            <td>Directivo</td>
+            <td>01-May-2001</td>
+        </tr>
+        <tr>
+            <td>Clark</td>
+            <td>Directivo</td>
+            <td>09-Jun-2001</td>
+        </tr>
+        <tr>
+            <td>Scott</td>
+            <td>Analista</td>
+            <td>09-Dec-2002</td>
+        </tr>
+        <tr>
+            <td>King</td>
+            <td>Director</td>
+            <td>17-Nov-2001</td>
+        </tr>
+        <tr>
+            <td>Turner</td>
+            <td>Vendedor</td>
+            <td>08-Sep-2001</td>
+        </tr>
+    </tbody>
+</table>
+<span style="font-style:italic;text-align:center;">Truncated to <a href="https://jupysql.ploomber.io/en/latest/api/configuration.html#displaylimit">displaylimit</a> of 10.</span></div></div>
+</div>
+</section>
+<section id="eliminacion-de-duplicados">
+<h3>Eliminación de duplicados<a class="headerlink" href="#eliminacion-de-duplicados" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p><strong>NOTA</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">DISTINCT</span></code> elimina los resultados duplicados tras la evaluación de una consulta.</p>
+</div></blockquote>
+<p>Ejemplo. Mostrar los diferentes empleos que tienen los empleados almacenados.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT DISTINCT empleo
+FROM Empleados;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">5 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>empleo</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Ordenanza</td>
+        </tr>
+        <tr>
+            <td>Vendedor</td>
+        </tr>
+        <tr>
+            <td>Directivo</td>
+        </tr>
+        <tr>
+            <td>Analista</td>
+        </tr>
+        <tr>
+            <td>Director</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+</section>
+<section id="ordenacion-y-limitacion-de-resultados">
+<h3>Ordenación y limitación de resultados<a class="headerlink" href="#ordenacion-y-limitacion-de-resultados" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p><strong>NOTA</strong></p>
+<p>La cláusula ORDER BY ordena los resultados de una consulta usando como criterios de ordenación la lista de columnas proporcionada.</p>
+</div></blockquote>
+<p>Ejemplo. Mostrar todas las filas de empleados ordenadas por sueldo</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT *
+FROM Empleados
+ORDER BY sueldo;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">14 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>nombre</th>
+            <th>empleo</th>
+            <th>jefe</th>
+            <th>fecha_entrada</th>
+            <th>sueldo</th>
+            <th>complemento</th>
+            <th>departamento_id</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>7369</td>
+            <td>Smith</td>
+            <td>Ordenanza</td>
+            <td>7902</td>
+            <td>2000-12-17</td>
+            <td>800.0</td>
+            <td>None</td>
+            <td>20</td>
+        </tr>
+        <tr>
+            <td>7900</td>
+            <td>James</td>
+            <td>Ordenanza</td>
+            <td>7698</td>
+            <td>2001-12-03</td>
+            <td>950.0</td>
+            <td>None</td>
+            <td>30</td>
+        </tr>
+        <tr>
+            <td>7876</td>
+            <td>Adams</td>
+            <td>Ordenanza</td>
+            <td>7788</td>
+            <td>2003-01-12</td>
+            <td>1100.0</td>
+            <td>None</td>
+            <td>20</td>
+        </tr>
+        <tr>
+            <td>7521</td>
+            <td>Ward</td>
+            <td>Vendedor</td>
+            <td>7698</td>
+            <td>2001-02-22</td>
+            <td>1250.0</td>
+            <td>500.0</td>
+            <td>30</td>
+        </tr>
+        <tr>
+            <td>7654</td>
+            <td>Martin</td>
+            <td>Vendedor</td>
+            <td>7698</td>
+            <td>2001-09-28</td>
+            <td>1250.0</td>
+            <td>1400.0</td>
+            <td>30</td>
+        </tr>
+        <tr>
+            <td>7934</td>
+            <td>Miller</td>
+            <td>Ordenanza</td>
+            <td>7782</td>
+            <td>2002-01-23</td>
+            <td>1300.0</td>
+            <td>None</td>
+            <td>10</td>
+        </tr>
+        <tr>
+            <td>7844</td>
+            <td>Turner</td>
+            <td>Vendedor</td>
+            <td>7698</td>
+            <td>2001-09-08</td>
+            <td>1500.0</td>
+            <td>0.0</td>
+            <td>30</td>
+        </tr>
+        <tr>
+            <td>7499</td>
+            <td>Allen</td>
+            <td>Vendedor</td>
+            <td>7698</td>
+            <td>2001-02-20</td>
+            <td>1600.0</td>
+            <td>300.0</td>
+            <td>30</td>
+        </tr>
+        <tr>
+            <td>7782</td>
+            <td>Clark</td>
+            <td>Directivo</td>
+            <td>7839</td>
+            <td>2001-06-09</td>
+            <td>2450.0</td>
+            <td>None</td>
+            <td>10</td>
+        </tr>
+        <tr>
+            <td>7698</td>
+            <td>Blake</td>
+            <td>Directivo</td>
+            <td>7839</td>
+            <td>2001-05-01</td>
+            <td>2850.0</td>
+            <td>None</td>
+            <td>30</td>
+        </tr>
+    </tbody>
+</table>
+<span style="font-style:italic;text-align:center;">Truncated to <a href="https://jupysql.ploomber.io/en/latest/api/configuration.html#displaylimit">displaylimit</a> of 10.</span></div></div>
+</div>
+<p>Ejemplo. Mostrar todas las filas de empleados ordenados por empleo y orden decreciente de sueldo</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT *
+FROM Empleados
+ORDER BY empleo, sueldo DESC;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">14 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>nombre</th>
+            <th>empleo</th>
+            <th>jefe</th>
+            <th>fecha_entrada</th>
+            <th>sueldo</th>
+            <th>complemento</th>
+            <th>departamento_id</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>7788</td>
+            <td>Scott</td>
+            <td>Analista</td>
+            <td>7566</td>
+            <td>2002-12-09</td>
+            <td>3000.0</td>
+            <td>None</td>
+            <td>20</td>
+        </tr>
+        <tr>
+            <td>7902</td>
+            <td>Ford</td>
+            <td>Analista</td>
+            <td>7566</td>
+            <td>2001-12-03</td>
+            <td>3000.0</td>
+            <td>None</td>
+            <td>20</td>
+        </tr>
+        <tr>
+            <td>7566</td>
+            <td>Jones</td>
+            <td>Directivo</td>
+            <td>7839</td>
+            <td>2001-04-02</td>
+            <td>2975.0</td>
+            <td>None</td>
+            <td>20</td>
+        </tr>
+        <tr>
+            <td>7698</td>
+            <td>Blake</td>
+            <td>Directivo</td>
+            <td>7839</td>
+            <td>2001-05-01</td>
+            <td>2850.0</td>
+            <td>None</td>
+            <td>30</td>
+        </tr>
+        <tr>
+            <td>7782</td>
+            <td>Clark</td>
+            <td>Directivo</td>
+            <td>7839</td>
+            <td>2001-06-09</td>
+            <td>2450.0</td>
+            <td>None</td>
+            <td>10</td>
+        </tr>
+        <tr>
+            <td>7839</td>
+            <td>King</td>
+            <td>Director</td>
+            <td>None</td>
+            <td>2001-11-17</td>
+            <td>5000.0</td>
+            <td>None</td>
+            <td>10</td>
+        </tr>
+        <tr>
+            <td>7934</td>
+            <td>Miller</td>
+            <td>Ordenanza</td>
+            <td>7782</td>
+            <td>2002-01-23</td>
+            <td>1300.0</td>
+            <td>None</td>
+            <td>10</td>
+        </tr>
+        <tr>
+            <td>7876</td>
+            <td>Adams</td>
+            <td>Ordenanza</td>
+            <td>7788</td>
+            <td>2003-01-12</td>
+            <td>1100.0</td>
+            <td>None</td>
+            <td>20</td>
+        </tr>
+        <tr>
+            <td>7900</td>
+            <td>James</td>
+            <td>Ordenanza</td>
+            <td>7698</td>
+            <td>2001-12-03</td>
+            <td>950.0</td>
+            <td>None</td>
+            <td>30</td>
+        </tr>
+        <tr>
+            <td>7369</td>
+            <td>Smith</td>
+            <td>Ordenanza</td>
+            <td>7902</td>
+            <td>2000-12-17</td>
+            <td>800.0</td>
+            <td>None</td>
+            <td>20</td>
+        </tr>
+    </tbody>
+</table>
+<span style="font-style:italic;text-align:center;">Truncated to <a href="https://jupysql.ploomber.io/en/latest/api/configuration.html#displaylimit">displaylimit</a> of 10.</span></div></div>
+</div>
+<blockquote>
+<div><p><strong>NOTA</strong></p>
+<p>La cláusula <code class="docutils literal notranslate"><span class="pre">LIMIT</span></code> limita el número de filas devueltas al valor especificado.</p>
+</div></blockquote>
+<p>Ejemplo. Mostrar las filas de los 3 empleados que tienen mayor sueldo</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT *
+FROM Empleados
+ORDER BY sueldo DESC
+LIMIT 3;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">3 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>nombre</th>
+            <th>empleo</th>
+            <th>jefe</th>
+            <th>fecha_entrada</th>
+            <th>sueldo</th>
+            <th>complemento</th>
+            <th>departamento_id</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>7839</td>
+            <td>King</td>
+            <td>Director</td>
+            <td>None</td>
+            <td>2001-11-17</td>
+            <td>5000.0</td>
+            <td>None</td>
+            <td>10</td>
+        </tr>
+        <tr>
+            <td>7902</td>
+            <td>Ford</td>
+            <td>Analista</td>
+            <td>7566</td>
+            <td>2001-12-03</td>
+            <td>3000.0</td>
+            <td>None</td>
+            <td>20</td>
+        </tr>
+        <tr>
+            <td>7788</td>
+            <td>Scott</td>
+            <td>Analista</td>
+            <td>7566</td>
+            <td>2002-12-09</td>
+            <td>3000.0</td>
+            <td>None</td>
+            <td>20</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+</section>
+<section id="funciones-de-agregacion">
+<h3>Funciones de agregación<a class="headerlink" href="#funciones-de-agregacion" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p><strong>NOTA</strong></p>
+<p>La función <code class="docutils literal notranslate"><span class="pre">MAX()</span></code> aplicada a una columna obtiene el valor máximo de la columna en los registros aplicados.</p>
+</div></blockquote>
+<p>Ejemplo. Obtener el sueldo máximo de la tabla de empleados</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT MAX(sueldo) AS sueldo_maximo
+FROM Empleados;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">1 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>sueldo_maximo</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>5000.0</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+<p>Ejemplo. Obtener el máximo de la combinación de sueldo y complemento de la tabla de empleados. Considerar como 0 los complementos nulos</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT MAX(sueldo + COALESCE(complemento, 0)) AS sueldo_total_maximo
+FROM Empleados;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">1 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>sueldo_total_maximo</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>5000.0</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+<blockquote>
+<div><p><strong>NOTA</strong></p>
+<p>La función <code class="docutils literal notranslate"><span class="pre">MIN()</span></code> aplicada a una columna obtiene el valor mínimo de la columna en los registros aplicados.</p>
+</div></blockquote>
+<p>Ejemplo. Obtener la fecha de entrada más antigua</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT MIN(fecha_entrada) AS fecha_entrada_mas_antigua
+FROM Empleados;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">1 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>fecha_entrada_mas_antigua</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>2000-12-17</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+<p>Ejemplo. Obtener la fecha de entrada más antigua aplicando el formato a la fecha de día con dos dígitos, mes abreviado y año con cuatro dígitos.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT DATE_FORMAT(MIN(fecha_entrada), &#39;%d-%b-%Y&#39;) AS fecha_entrada_mas_antigua
+FROM Empleados;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">1 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>fecha_entrada_mas_antigua</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>17-Dec-2000</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+<blockquote>
+<div><p><strong>NOTA</strong></p>
+<p>La función <code class="docutils literal notranslate"><span class="pre">SUM()</span></code> aplicada a una columna obtiene la suma de los valores de la columna en los registros aplicados.</p>
+</div></blockquote>
+<p>Ejemplo. Obtener la suma de los sueldos dedicados a empleos de dirección.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT SUM(sueldo) AS suma_sueldos_direccion
+FROM Empleados
+WHERE empleo LIKE &#39;%Director%&#39;;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">1 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>suma_sueldos_direccion</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>5000.0</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+<blockquote>
+<div><p><strong>NOTA</strong></p>
+<p>La función <code class="docutils literal notranslate"><span class="pre">AVG()</span></code> aplicada a una columna obtiene la media de los valores numéricos de la columna en los registros aplicados.</p>
+</div></blockquote>
+<p>Ejemplo. Obtener el sueldo medio del empleo Vendedor.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT AVG(sueldo) AS sueldo_medio_vendedor
+FROM Empleados
+WHERE empleo = &#39;Vendedor&#39;;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">1 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>sueldo_medio_vendedor</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1400.0</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+<blockquote>
+<div><p><strong>NOTA</strong></p>
+<p>La función <code class="docutils literal notranslate"><span class="pre">COUNT()</span></code> aplicada a una columna obtiene la cantidad de valores no nulos en los registros aplicados. La función <code class="docutils literal notranslate"><span class="pre">COUNT(*)</span></code> devuelve la cantidad de filas del resultado.</p>
+</div></blockquote>
+<p>Ejemplo. Obtener la cantidad de empleados que tenemos almacenados</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT COUNT(*) AS cantidad_empleados
+FROM Empleados;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">1 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>cantidad_empleados</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>14</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+<blockquote>
+<div><p><strong>NOTA</strong></p>
+<p>Al añadir <code class="docutils literal notranslate"><span class="pre">DISTINCT</span></code> a la columna a la que se aplica <code class="docutils literal notranslate"><span class="pre">COUNT()</span></code> se obtiene la cuenta de valores diferentes eliminando los duplicados.</p>
+</div></blockquote>
+<p>Ejemplo. Obtener el número de empleos diferentes que tienen los empleados</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT COUNT(DISTINCT empleo) AS cantidad_empleos_diferentes
+FROM Empleados;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">1 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>cantidad_empleos_diferentes</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>5</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+<blockquote>
+<div><p><strong>NOTA</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">COUNT</span> <span class="pre">(DISTINCT</span> <span class="pre">columna)</span></code> descarta los valores nulos.</p>
+</div></blockquote>
+<p>Ejemplo. Obtener la cantidad de jefes diferentes</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT COUNT(DISTINCT jefe) AS cantidad_jefes_diferentes
+FROM Empleados
+WHERE jefe IS NOT NULL;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">1 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>cantidad_jefes_diferentes</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>6</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+</section>
+</section>
+<section id="agregacion-de-resultados">
+<h2>Agregación de resultados<a class="headerlink" href="#agregacion-de-resultados" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p><strong>NOTA</strong></p>
+<p>La cláusula GROUP BY crea grupos para la lista de columnas indicadas. Los grupos creados son la base a los que se les puede aplicar funciones de agregación <code class="docutils literal notranslate"><span class="pre">COUNT()</span></code>, <code class="docutils literal notranslate"><span class="pre">SUM()</span></code>, <code class="docutils literal notranslate"><span class="pre">MAX()</span></code>, <code class="docutils literal notranslate"><span class="pre">MIN()</span></code> y <code class="docutils literal notranslate"><span class="pre">AVG()</span></code>.</p>
+</div></blockquote>
+<p>Ejemplo. Obtener la cantidad de empleados que tiene cada empleo</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT empleo, COUNT(*) AS cantidad_empleados
+FROM Empleados
+GROUP BY empleo;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">5 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>empleo</th>
+            <th>cantidad_empleados</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Ordenanza</td>
+            <td>4</td>
+        </tr>
+        <tr>
+            <td>Vendedor</td>
+            <td>4</td>
+        </tr>
+        <tr>
+            <td>Directivo</td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td>Analista</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td>Director</td>
+            <td>1</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+<p>Ejemplo. Obtener la cantidad de empleados que tiene cada empleo para los empleados cuya fecha de entrada sea el año 2001.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT empleo, COUNT(*) AS cantidad_empleados
+FROM Empleados
+WHERE YEAR(fecha_entrada) = 2001
+GROUP BY empleo;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">5 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>empleo</th>
+            <th>cantidad_empleados</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Vendedor</td>
+            <td>4</td>
+        </tr>
+        <tr>
+            <td>Directivo</td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td>Director</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>Ordenanza</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>Analista</td>
+            <td>1</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+<p>Ejemplo. Obtener la cantidad de empleados por año de entrada</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT YEAR(fecha_entrada) AS anio_entrada, COUNT(*) AS cantidad_empleados
+FROM Empleados
+GROUP BY YEAR(fecha_entrada);
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">4 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>anio_entrada</th>
+            <th>cantidad_empleados</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>2000</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>2001</td>
+            <td>10</td>
+        </tr>
+        <tr>
+            <td>2002</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td>2003</td>
+            <td>1</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+<blockquote>
+<div><p><strong>NOTA</strong></p>
+<p>La cláusula HAVING actúa como un filtro sobre los valores agregados.</p>
+</div></blockquote>
+<p>Ejemplo. Obtener la cantidad de empleados por año de entrada para aquellos años que tengan más de 5 empleados.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT YEAR(fecha_entrada) AS anio_entrada, COUNT(*) AS cantidad_empleados
+FROM Empleados
+GROUP BY YEAR(fecha_entrada)
+HAVING COUNT(*) &gt; 5;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">1 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>anio_entrada</th>
+            <th>cantidad_empleados</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>2001</td>
+            <td>10</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+<blockquote>
+<div><p><strong>NOTA</strong></p>
+<p>No confundir la cláusula <code class="docutils literal notranslate"><span class="pre">WHERE</span></code> con la cláusula <code class="docutils literal notranslate"><span class="pre">HAVING</span></code>. <code class="docutils literal notranslate"><span class="pre">WHERE</span></code> actúa como un filtro para filas previo a la agregación. <code class="docutils literal notranslate"><span class="pre">HAVING</span></code> actúa como un filtro para grupos posterior al proceso de agregación.</p>
+</div></blockquote>
+<p>Ejemplo. Obtener la cantidad de empleados por año de entrada considerando sólo aquellos empleados con sueldos comprendidos entre 2000 y 3000.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT YEAR(fecha_entrada) AS anio_entrada, COUNT(*) AS cantidad_empleados
+FROM Empleados
+WHERE sueldo BETWEEN 2000 AND 3000
+GROUP BY YEAR(fecha_entrada);
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">2 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>anio_entrada</th>
+            <th>cantidad_empleados</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>2001</td>
+            <td>4</td>
+        </tr>
+        <tr>
+            <td>2002</td>
+            <td>1</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+<p>Ejemplo. Obtener la cantidad de empleados por año de entrada considerando sólo aquellos empleados con sueldos comprendidos entre 2000 y 3000. mostrar sólo los resultados de aquellos años que tuvieron más de 3 empleados.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT YEAR(fecha_entrada) AS anio_entrada, COUNT(*) AS cantidad_empleados
+FROM Empleados
+WHERE sueldo BETWEEN 2000 AND 3000
+GROUP BY YEAR(fecha_entrada)
+HAVING COUNT(*) &gt; 3;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">1 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>anio_entrada</th>
+            <th>cantidad_empleados</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>2001</td>
+            <td>4</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+<section id="combinacion-de-tablas-con-producto-cartesiano">
+<h3>Combinación de tablas con producto cartesiano<a class="headerlink" href="#combinacion-de-tablas-con-producto-cartesiano" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p><strong>NOTA</strong></p>
+<p>La operación de producto cartesiano (o <code class="docutils literal notranslate"><span class="pre">CROSS</span></code>JOIN`) combina todas las filas de las tablas indicadas</p>
+</div></blockquote>
+<p>Ejemplo. Mostrar todas las filas resultantes de combinar los empleados con los departamentos</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT *
+FROM Empleados, Departamentos;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">56 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>nombre</th>
+            <th>empleo</th>
+            <th>jefe</th>
+            <th>fecha_entrada</th>
+            <th>sueldo</th>
+            <th>complemento</th>
+            <th>departamento_id</th>
+            <th>id_1</th>
+            <th>nombre_1</th>
+            <th>ciudad</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>7369</td>
+            <td>Smith</td>
+            <td>Ordenanza</td>
+            <td>7902</td>
+            <td>2000-12-17</td>
+            <td>800.0</td>
+            <td>None</td>
+            <td>20</td>
+            <td>40</td>
+            <td>Operaciones</td>
+            <td>Boston</td>
+        </tr>
+        <tr>
+            <td>7369</td>
+            <td>Smith</td>
+            <td>Ordenanza</td>
+            <td>7902</td>
+            <td>2000-12-17</td>
+            <td>800.0</td>
+            <td>None</td>
+            <td>20</td>
+            <td>30</td>
+            <td>Ventas</td>
+            <td>Chicago</td>
+        </tr>
+        <tr>
+            <td>7369</td>
+            <td>Smith</td>
+            <td>Ordenanza</td>
+            <td>7902</td>
+            <td>2000-12-17</td>
+            <td>800.0</td>
+            <td>None</td>
+            <td>20</td>
+            <td>20</td>
+            <td>Investigacion</td>
+            <td>Dallas</td>
+        </tr>
+        <tr>
+            <td>7369</td>
+            <td>Smith</td>
+            <td>Ordenanza</td>
+            <td>7902</td>
+            <td>2000-12-17</td>
+            <td>800.0</td>
+            <td>None</td>
+            <td>20</td>
+            <td>10</td>
+            <td>Contabilidad</td>
+            <td>Nueva York</td>
+        </tr>
+        <tr>
+            <td>7499</td>
+            <td>Allen</td>
+            <td>Vendedor</td>
+            <td>7698</td>
+            <td>2001-02-20</td>
+            <td>1600.0</td>
+            <td>300.0</td>
+            <td>30</td>
+            <td>40</td>
+            <td>Operaciones</td>
+            <td>Boston</td>
+        </tr>
+        <tr>
+            <td>7499</td>
+            <td>Allen</td>
+            <td>Vendedor</td>
+            <td>7698</td>
+            <td>2001-02-20</td>
+            <td>1600.0</td>
+            <td>300.0</td>
+            <td>30</td>
+            <td>30</td>
+            <td>Ventas</td>
+            <td>Chicago</td>
+        </tr>
+        <tr>
+            <td>7499</td>
+            <td>Allen</td>
+            <td>Vendedor</td>
+            <td>7698</td>
+            <td>2001-02-20</td>
+            <td>1600.0</td>
+            <td>300.0</td>
+            <td>30</td>
+            <td>20</td>
+            <td>Investigacion</td>
+            <td>Dallas</td>
+        </tr>
+        <tr>
+            <td>7499</td>
+            <td>Allen</td>
+            <td>Vendedor</td>
+            <td>7698</td>
+            <td>2001-02-20</td>
+            <td>1600.0</td>
+            <td>300.0</td>
+            <td>30</td>
+            <td>10</td>
+            <td>Contabilidad</td>
+            <td>Nueva York</td>
+        </tr>
+        <tr>
+            <td>7521</td>
+            <td>Ward</td>
+            <td>Vendedor</td>
+            <td>7698</td>
+            <td>2001-02-22</td>
+            <td>1250.0</td>
+            <td>500.0</td>
+            <td>30</td>
+            <td>40</td>
+            <td>Operaciones</td>
+            <td>Boston</td>
+        </tr>
+        <tr>
+            <td>7521</td>
+            <td>Ward</td>
+            <td>Vendedor</td>
+            <td>7698</td>
+            <td>2001-02-22</td>
+            <td>1250.0</td>
+            <td>500.0</td>
+            <td>30</td>
+            <td>30</td>
+            <td>Ventas</td>
+            <td>Chicago</td>
+        </tr>
+    </tbody>
+</table>
+<span style="font-style:italic;text-align:center;">Truncated to <a href="https://jupysql.ploomber.io/en/latest/api/configuration.html#displaylimit">displaylimit</a> of 10.</span></div></div>
+</div>
+<blockquote>
+<div><p><strong>NOTA</strong></p>
+<p>El resultado combina cada empleado con todos los departamentos existentes, aunque no sea el departamento en que trabaja.</p>
+</div></blockquote>
+<p>Ejemplo. Usar <code class="docutils literal notranslate"><span class="pre">CROSS</span> <span class="pre">JOIN</span></code> para mostrar todas las filas resultantes de combinar los empleados con los departamentos</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT *
+FROM Empleados
+CROSS JOIN Departamentos;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">56 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>nombre</th>
+            <th>empleo</th>
+            <th>jefe</th>
+            <th>fecha_entrada</th>
+            <th>sueldo</th>
+            <th>complemento</th>
+            <th>departamento_id</th>
+            <th>id_1</th>
+            <th>nombre_1</th>
+            <th>ciudad</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>7369</td>
+            <td>Smith</td>
+            <td>Ordenanza</td>
+            <td>7902</td>
+            <td>2000-12-17</td>
+            <td>800.0</td>
+            <td>None</td>
+            <td>20</td>
+            <td>40</td>
+            <td>Operaciones</td>
+            <td>Boston</td>
+        </tr>
+        <tr>
+            <td>7369</td>
+            <td>Smith</td>
+            <td>Ordenanza</td>
+            <td>7902</td>
+            <td>2000-12-17</td>
+            <td>800.0</td>
+            <td>None</td>
+            <td>20</td>
+            <td>30</td>
+            <td>Ventas</td>
+            <td>Chicago</td>
+        </tr>
+        <tr>
+            <td>7369</td>
+            <td>Smith</td>
+            <td>Ordenanza</td>
+            <td>7902</td>
+            <td>2000-12-17</td>
+            <td>800.0</td>
+            <td>None</td>
+            <td>20</td>
+            <td>20</td>
+            <td>Investigacion</td>
+            <td>Dallas</td>
+        </tr>
+        <tr>
+            <td>7369</td>
+            <td>Smith</td>
+            <td>Ordenanza</td>
+            <td>7902</td>
+            <td>2000-12-17</td>
+            <td>800.0</td>
+            <td>None</td>
+            <td>20</td>
+            <td>10</td>
+            <td>Contabilidad</td>
+            <td>Nueva York</td>
+        </tr>
+        <tr>
+            <td>7499</td>
+            <td>Allen</td>
+            <td>Vendedor</td>
+            <td>7698</td>
+            <td>2001-02-20</td>
+            <td>1600.0</td>
+            <td>300.0</td>
+            <td>30</td>
+            <td>40</td>
+            <td>Operaciones</td>
+            <td>Boston</td>
+        </tr>
+        <tr>
+            <td>7499</td>
+            <td>Allen</td>
+            <td>Vendedor</td>
+            <td>7698</td>
+            <td>2001-02-20</td>
+            <td>1600.0</td>
+            <td>300.0</td>
+            <td>30</td>
+            <td>30</td>
+            <td>Ventas</td>
+            <td>Chicago</td>
+        </tr>
+        <tr>
+            <td>7499</td>
+            <td>Allen</td>
+            <td>Vendedor</td>
+            <td>7698</td>
+            <td>2001-02-20</td>
+            <td>1600.0</td>
+            <td>300.0</td>
+            <td>30</td>
+            <td>20</td>
+            <td>Investigacion</td>
+            <td>Dallas</td>
+        </tr>
+        <tr>
+            <td>7499</td>
+            <td>Allen</td>
+            <td>Vendedor</td>
+            <td>7698</td>
+            <td>2001-02-20</td>
+            <td>1600.0</td>
+            <td>300.0</td>
+            <td>30</td>
+            <td>10</td>
+            <td>Contabilidad</td>
+            <td>Nueva York</td>
+        </tr>
+        <tr>
+            <td>7521</td>
+            <td>Ward</td>
+            <td>Vendedor</td>
+            <td>7698</td>
+            <td>2001-02-22</td>
+            <td>1250.0</td>
+            <td>500.0</td>
+            <td>30</td>
+            <td>40</td>
+            <td>Operaciones</td>
+            <td>Boston</td>
+        </tr>
+        <tr>
+            <td>7521</td>
+            <td>Ward</td>
+            <td>Vendedor</td>
+            <td>7698</td>
+            <td>2001-02-22</td>
+            <td>1250.0</td>
+            <td>500.0</td>
+            <td>30</td>
+            <td>30</td>
+            <td>Ventas</td>
+            <td>Chicago</td>
+        </tr>
+    </tbody>
+</table>
+<span style="font-style:italic;text-align:center;">Truncated to <a href="https://jupysql.ploomber.io/en/latest/api/configuration.html#displaylimit">displaylimit</a> of 10.</span></div></div>
+</div>
+<blockquote>
+<div><p><strong>NOTA</strong></p>
+<p>La eliminación de las filas que combinan los empleados con departamentos en los que no trabajan se puede realizar aplicando un filtro que seleccione sólo las filas en que coincidan el número de departamento en el que trabajan los empleados con el número de los departamentos.</p>
+</div></blockquote>
+<p>Ejemplo. Mostrar las filas resultantes de combinar los empleados con los departamentos en los que trabaja cada uno de ellos.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT *
+FROM Empleados, Departamentos
+WHERE Empleados.departamento_id = Departamentos.id;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">14 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>nombre</th>
+            <th>empleo</th>
+            <th>jefe</th>
+            <th>fecha_entrada</th>
+            <th>sueldo</th>
+            <th>complemento</th>
+            <th>departamento_id</th>
+            <th>id_1</th>
+            <th>nombre_1</th>
+            <th>ciudad</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>7782</td>
+            <td>Clark</td>
+            <td>Directivo</td>
+            <td>7839</td>
+            <td>2001-06-09</td>
+            <td>2450.0</td>
+            <td>None</td>
+            <td>10</td>
+            <td>10</td>
+            <td>Contabilidad</td>
+            <td>Nueva York</td>
+        </tr>
+        <tr>
+            <td>7839</td>
+            <td>King</td>
+            <td>Director</td>
+            <td>None</td>
+            <td>2001-11-17</td>
+            <td>5000.0</td>
+            <td>None</td>
+            <td>10</td>
+            <td>10</td>
+            <td>Contabilidad</td>
+            <td>Nueva York</td>
+        </tr>
+        <tr>
+            <td>7934</td>
+            <td>Miller</td>
+            <td>Ordenanza</td>
+            <td>7782</td>
+            <td>2002-01-23</td>
+            <td>1300.0</td>
+            <td>None</td>
+            <td>10</td>
+            <td>10</td>
+            <td>Contabilidad</td>
+            <td>Nueva York</td>
+        </tr>
+        <tr>
+            <td>7369</td>
+            <td>Smith</td>
+            <td>Ordenanza</td>
+            <td>7902</td>
+            <td>2000-12-17</td>
+            <td>800.0</td>
+            <td>None</td>
+            <td>20</td>
+            <td>20</td>
+            <td>Investigacion</td>
+            <td>Dallas</td>
+        </tr>
+        <tr>
+            <td>7566</td>
+            <td>Jones</td>
+            <td>Directivo</td>
+            <td>7839</td>
+            <td>2001-04-02</td>
+            <td>2975.0</td>
+            <td>None</td>
+            <td>20</td>
+            <td>20</td>
+            <td>Investigacion</td>
+            <td>Dallas</td>
+        </tr>
+        <tr>
+            <td>7788</td>
+            <td>Scott</td>
+            <td>Analista</td>
+            <td>7566</td>
+            <td>2002-12-09</td>
+            <td>3000.0</td>
+            <td>None</td>
+            <td>20</td>
+            <td>20</td>
+            <td>Investigacion</td>
+            <td>Dallas</td>
+        </tr>
+        <tr>
+            <td>7876</td>
+            <td>Adams</td>
+            <td>Ordenanza</td>
+            <td>7788</td>
+            <td>2003-01-12</td>
+            <td>1100.0</td>
+            <td>None</td>
+            <td>20</td>
+            <td>20</td>
+            <td>Investigacion</td>
+            <td>Dallas</td>
+        </tr>
+        <tr>
+            <td>7902</td>
+            <td>Ford</td>
+            <td>Analista</td>
+            <td>7566</td>
+            <td>2001-12-03</td>
+            <td>3000.0</td>
+            <td>None</td>
+            <td>20</td>
+            <td>20</td>
+            <td>Investigacion</td>
+            <td>Dallas</td>
+        </tr>
+        <tr>
+            <td>7499</td>
+            <td>Allen</td>
+            <td>Vendedor</td>
+            <td>7698</td>
+            <td>2001-02-20</td>
+            <td>1600.0</td>
+            <td>300.0</td>
+            <td>30</td>
+            <td>30</td>
+            <td>Ventas</td>
+            <td>Chicago</td>
+        </tr>
+        <tr>
+            <td>7521</td>
+            <td>Ward</td>
+            <td>Vendedor</td>
+            <td>7698</td>
+            <td>2001-02-22</td>
+            <td>1250.0</td>
+            <td>500.0</td>
+            <td>30</td>
+            <td>30</td>
+            <td>Ventas</td>
+            <td>Chicago</td>
+        </tr>
+    </tbody>
+</table>
+<span style="font-style:italic;text-align:center;">Truncated to <a href="https://jupysql.ploomber.io/en/latest/api/configuration.html#displaylimit">displaylimit</a> of 10.</span></div></div>
+</div>
+<p>Ejemplo. Mostrar las filas resultantes de combinar el departamento de Ventas con sus empleados.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT *
+FROM Empleados, Departamentos
+WHERE Empleados.departamento_id = Departamentos.id
+AND Departamentos.nombre = &#39;Ventas&#39;;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">6 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>nombre</th>
+            <th>empleo</th>
+            <th>jefe</th>
+            <th>fecha_entrada</th>
+            <th>sueldo</th>
+            <th>complemento</th>
+            <th>departamento_id</th>
+            <th>id_1</th>
+            <th>nombre_1</th>
+            <th>ciudad</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>7499</td>
+            <td>Allen</td>
+            <td>Vendedor</td>
+            <td>7698</td>
+            <td>2001-02-20</td>
+            <td>1600.0</td>
+            <td>300.0</td>
+            <td>30</td>
+            <td>30</td>
+            <td>Ventas</td>
+            <td>Chicago</td>
+        </tr>
+        <tr>
+            <td>7521</td>
+            <td>Ward</td>
+            <td>Vendedor</td>
+            <td>7698</td>
+            <td>2001-02-22</td>
+            <td>1250.0</td>
+            <td>500.0</td>
+            <td>30</td>
+            <td>30</td>
+            <td>Ventas</td>
+            <td>Chicago</td>
+        </tr>
+        <tr>
+            <td>7654</td>
+            <td>Martin</td>
+            <td>Vendedor</td>
+            <td>7698</td>
+            <td>2001-09-28</td>
+            <td>1250.0</td>
+            <td>1400.0</td>
+            <td>30</td>
+            <td>30</td>
+            <td>Ventas</td>
+            <td>Chicago</td>
+        </tr>
+        <tr>
+            <td>7698</td>
+            <td>Blake</td>
+            <td>Directivo</td>
+            <td>7839</td>
+            <td>2001-05-01</td>
+            <td>2850.0</td>
+            <td>None</td>
+            <td>30</td>
+            <td>30</td>
+            <td>Ventas</td>
+            <td>Chicago</td>
+        </tr>
+        <tr>
+            <td>7844</td>
+            <td>Turner</td>
+            <td>Vendedor</td>
+            <td>7698</td>
+            <td>2001-09-08</td>
+            <td>1500.0</td>
+            <td>0.0</td>
+            <td>30</td>
+            <td>30</td>
+            <td>Ventas</td>
+            <td>Chicago</td>
+        </tr>
+        <tr>
+            <td>7900</td>
+            <td>James</td>
+            <td>Ordenanza</td>
+            <td>7698</td>
+            <td>2001-12-03</td>
+            <td>950.0</td>
+            <td>None</td>
+            <td>30</td>
+            <td>30</td>
+            <td>Ventas</td>
+            <td>Chicago</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+<p>Ejemplo. Obtener la cantidad de empleados que hay en el departamento de Ventas agrupados por el tipo de empleo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT empleo, COUNT(*) AS cantidad_empleados
+FROM Empleados, Departamentos
+WHERE Empleados.departamento_id = Departamentos.id
+AND Departamentos.nombre = &#39;Ventas&#39;
+GROUP BY empleo;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">3 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>empleo</th>
+            <th>cantidad_empleados</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Vendedor</td>
+            <td>4</td>
+        </tr>
+        <tr>
+            <td>Directivo</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>Ordenanza</td>
+            <td>1</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+<p>Ejemplo. Obtener para las ciudades de Dallas y Chicago la cantidad de empleados y su sueldo medio.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT Departamentos.ciudad, COUNT(*) AS cantidad_empleados, AVG(Empleados.sueldo) AS sueldo_medio
+FROM Empleados, Departamentos
+WHERE Empleados.departamento_id = Departamentos.id
+AND Departamentos.ciudad IN (&#39;Dallas&#39;, &#39;Chicago&#39;)
+GROUP BY Departamentos.ciudad;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">2 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>ciudad</th>
+            <th>cantidad_empleados</th>
+            <th>sueldo_medio</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Dallas</td>
+            <td>5</td>
+            <td>2175.0</td>
+        </tr>
+        <tr>
+            <td>Chicago</td>
+            <td>6</td>
+            <td>1566.6666666666667</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+<p>Ejemplo. Obtener el sueldo medio por ciudades para aquellos casos que tengan un sueldo medio superior a 2000.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT Departamentos.ciudad, AVG(Empleados.sueldo) AS sueldo_medio
+FROM Empleados, Departamentos
+WHERE Empleados.departamento_id = Departamentos.id
+GROUP BY Departamentos.ciudad
+HAVING AVG(Empleados.sueldo) &gt; 2000;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">2 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>ciudad</th>
+            <th>sueldo_medio</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Nueva York</td>
+            <td>2916.6666666666665</td>
+        </tr>
+        <tr>
+            <td>Dallas</td>
+            <td>2175.0</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+</section>
+<section id="combinacion-de-tablas-con-inner-join">
+<h3>Combinación de tablas con INNER JOIN<a class="headerlink" href="#combinacion-de-tablas-con-inner-join" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p><strong>NOTA</strong></p>
+<p>El operador <code class="docutils literal notranslate"><span class="pre">INNER</span> <span class="pre">JOIN</span></code> combina en una única operación el producto cartesiano y el filtrado de filas con el criterio indicado. La condición de filtrado pasa de la cláusula <code class="docutils literal notranslate"><span class="pre">WHERE</span></code> a la cláusula <code class="docutils literal notranslate"><span class="pre">FROM</span></code> sacando de la cláusula <code class="docutils literal notranslate"><span class="pre">WHERE</span></code> las <em>condiciones de join</em>.</p>
+</div></blockquote>
+<p>Ejemplo. Usar el operador INNER JOIN para mostrar todas las columnas de empleado junto al nombre del departamento en que trabajan para aquellos empleados que trabajan en el departamento de Ventas.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT Empleados.*, Departamentos.nombre AS nombre_departamento
+FROM Empleados
+INNER JOIN Departamentos ON Empleados.departamento_id = Departamentos.id
+WHERE Departamentos.nombre = &#39;Ventas&#39;;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">6 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>nombre</th>
+            <th>empleo</th>
+            <th>jefe</th>
+            <th>fecha_entrada</th>
+            <th>sueldo</th>
+            <th>complemento</th>
+            <th>departamento_id</th>
+            <th>nombre_departamento</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>7499</td>
+            <td>Allen</td>
+            <td>Vendedor</td>
+            <td>7698</td>
+            <td>2001-02-20</td>
+            <td>1600.0</td>
+            <td>300.0</td>
+            <td>30</td>
+            <td>Ventas</td>
+        </tr>
+        <tr>
+            <td>7521</td>
+            <td>Ward</td>
+            <td>Vendedor</td>
+            <td>7698</td>
+            <td>2001-02-22</td>
+            <td>1250.0</td>
+            <td>500.0</td>
+            <td>30</td>
+            <td>Ventas</td>
+        </tr>
+        <tr>
+            <td>7654</td>
+            <td>Martin</td>
+            <td>Vendedor</td>
+            <td>7698</td>
+            <td>2001-09-28</td>
+            <td>1250.0</td>
+            <td>1400.0</td>
+            <td>30</td>
+            <td>Ventas</td>
+        </tr>
+        <tr>
+            <td>7698</td>
+            <td>Blake</td>
+            <td>Directivo</td>
+            <td>7839</td>
+            <td>2001-05-01</td>
+            <td>2850.0</td>
+            <td>None</td>
+            <td>30</td>
+            <td>Ventas</td>
+        </tr>
+        <tr>
+            <td>7844</td>
+            <td>Turner</td>
+            <td>Vendedor</td>
+            <td>7698</td>
+            <td>2001-09-08</td>
+            <td>1500.0</td>
+            <td>0.0</td>
+            <td>30</td>
+            <td>Ventas</td>
+        </tr>
+        <tr>
+            <td>7900</td>
+            <td>James</td>
+            <td>Ordenanza</td>
+            <td>7698</td>
+            <td>2001-12-03</td>
+            <td>950.0</td>
+            <td>None</td>
+            <td>30</td>
+            <td>Ventas</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+</section>
+<section id="combinacion-de-tablas-con-left-join">
+<h3>Combinación de tablas con LEFT JOIN<a class="headerlink" href="#combinacion-de-tablas-con-left-join" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p><strong>NOTA</strong></p>
+<p>El operador <code class="docutils literal notranslate"><span class="pre">LEFT</span> <span class="pre">JOIN</span></code> relaja al operador <code class="docutils literal notranslate"><span class="pre">INNER</span> <span class="pre">JOIN</span></code> mostrando en los resultados todas las filas de la tabla que aparece a la izquierda del <code class="docutils literal notranslate"><span class="pre">LEFT</span> <span class="pre">JOIN</span></code>. Si hay valores con los que combinar mostrará los valores. Si no hay valores, completará el resultado con valores <code class="docutils literal notranslate"><span class="pre">NULL</span></code>.</p>
+</div></blockquote>
+<p>Ejemplo. Obtener la cantidad de empleados que tiene cada departamento.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT Departamentos.nombre, COUNT(Empleados.id) AS cantidad_empleados
+FROM Departamentos
+LEFT JOIN Empleados ON Departamentos.id = Empleados.departamento_id
+GROUP BY Departamentos.nombre;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">4 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>nombre</th>
+            <th>cantidad_empleados</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Contabilidad</td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td>Investigacion</td>
+            <td>5</td>
+        </tr>
+        <tr>
+            <td>Ventas</td>
+            <td>6</td>
+        </tr>
+        <tr>
+            <td>Operaciones</td>
+            <td>0</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+<blockquote>
+<div><p><strong>NOTA</strong></p>
+<p>Si se realiza la combinación de tablas con el operador <code class="docutils literal notranslate"><span class="pre">INNER</span> <span class="pre">JOIN</span></code> se perdería el departamento de Operaciones.</p>
+</div></blockquote>
+<p>Ejemplo. Obtener la cantidad de empleados que tiene cada departamento usando <code class="docutils literal notranslate"><span class="pre">INNER</span> <span class="pre">JOIN</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT Departamentos.nombre, COUNT(Empleados.id) AS cantidad_empleados
+FROM Departamentos
+INNER JOIN Empleados ON Departamentos.id = Empleados.departamento_id
+GROUP BY Departamentos.nombre;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">3 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>nombre</th>
+            <th>cantidad_empleados</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Contabilidad</td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td>Investigacion</td>
+            <td>5</td>
+        </tr>
+        <tr>
+            <td>Ventas</td>
+            <td>6</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+</section>
+</section>
+<section id="uso-de-alias-para-tablas">
+<h2>Uso de alias para tablas<a class="headerlink" href="#uso-de-alias-para-tablas" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p><strong>NOTA</strong></p>
+<p>Es posible utilizar un nuevo nombre (o alias) para una tabla involucrada en una consulta. Un caso habitual de uso de los alias es para usar un nombre abreviado para las tablas.</p>
+</div></blockquote>
+<p>Ejemplo. Obtener la cantidad de empleados por nombre de departamento</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT D.nombre, COUNT(E.id) AS cantidad_empleados
+FROM Departamentos D
+LEFT JOIN Empleados E ON D.id = E.departamento_id
+GROUP BY D.nombre;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">4 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>nombre</th>
+            <th>cantidad_empleados</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Contabilidad</td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td>Investigacion</td>
+            <td>5</td>
+        </tr>
+        <tr>
+            <td>Ventas</td>
+            <td>6</td>
+        </tr>
+        <tr>
+            <td>Operaciones</td>
+            <td>0</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+<blockquote>
+<div><p><strong>NOTA</strong></p>
+<p>El uso de alias hace que la tabla a la que se le ha aplicado el alias pase a ser denominada con el nombre del alias. El uso del nombre anterior produciría un error.</p>
+</div></blockquote>
+</section>
+<section id="subconsultas">
+<h2>Subconsultas<a class="headerlink" href="#subconsultas" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p><strong>NOTA</strong></p>
+<p>Los resultados que devuelve una consulta pueden ser usados para evaluar las condiciones de otras consultas. Esto se consigue anidando consultas. Las consultas internas se denominan subconsultas, que son evaluadas en primer lugar ofreciendo sus valores a las consultas exteriores.</p>
+</div></blockquote>
+<p>Ejemplo. Obtener nombre y sueldo de los empleados que tienen un sueldo superior al sueldo del empleado Allen.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT nombre, sueldo
+FROM Empleados
+WHERE sueldo &gt; (SELECT sueldo FROM Empleados WHERE nombre = &#39;Allen&#39;);
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">6 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>nombre</th>
+            <th>sueldo</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Jones</td>
+            <td>2975.0</td>
+        </tr>
+        <tr>
+            <td>Blake</td>
+            <td>2850.0</td>
+        </tr>
+        <tr>
+            <td>Clark</td>
+            <td>2450.0</td>
+        </tr>
+        <tr>
+            <td>Scott</td>
+            <td>3000.0</td>
+        </tr>
+        <tr>
+            <td>King</td>
+            <td>5000.0</td>
+        </tr>
+        <tr>
+            <td>Ford</td>
+            <td>3000.0</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+<p>Ejemplo. Obtener nombre y sueldo de los empleados que tienen un sueldo superior al sueldo máximo de los empleados con empleo Vendedor.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT nombre, sueldo
+FROM Empleados
+WHERE sueldo &gt; (SELECT MAX(sueldo) FROM Empleados WHERE empleo = &#39;Vendedor&#39;);
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">6 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>nombre</th>
+            <th>sueldo</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Jones</td>
+            <td>2975.0</td>
+        </tr>
+        <tr>
+            <td>Blake</td>
+            <td>2850.0</td>
+        </tr>
+        <tr>
+            <td>Clark</td>
+            <td>2450.0</td>
+        </tr>
+        <tr>
+            <td>Scott</td>
+            <td>3000.0</td>
+        </tr>
+        <tr>
+            <td>King</td>
+            <td>5000.0</td>
+        </tr>
+        <tr>
+            <td>Ford</td>
+            <td>3000.0</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+<section id="los-operadores-all-y-any">
+<h3>Los operadores ALL y ANY<a class="headerlink" href="#los-operadores-all-y-any" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p><strong>NOTA</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">ALL</span></code> se evalua como verdadero cuando se cumple para todos los valores afectados. <code class="docutils literal notranslate"><span class="pre">ANY</span></code> se evalua como verdadero cuando se cumple para alguno de los valores afectados.</p>
+</div></blockquote>
+<p>Ejemplo. Obtener nombre y sueldo de los empleados que tienen un sueldo superior al sueldo de todos los empleados con empleo Vendedor.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT nombre, sueldo
+FROM Empleados
+WHERE sueldo &gt; ALL (SELECT sueldo FROM Empleados WHERE empleo = &#39;Vendedor&#39;);
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">6 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>nombre</th>
+            <th>sueldo</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Jones</td>
+            <td>2975.0</td>
+        </tr>
+        <tr>
+            <td>Blake</td>
+            <td>2850.0</td>
+        </tr>
+        <tr>
+            <td>Clark</td>
+            <td>2450.0</td>
+        </tr>
+        <tr>
+            <td>Scott</td>
+            <td>3000.0</td>
+        </tr>
+        <tr>
+            <td>King</td>
+            <td>5000.0</td>
+        </tr>
+        <tr>
+            <td>Ford</td>
+            <td>3000.0</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+<p>Ejemplo. Obtener nombre y sueldo de los empleados que tienen un sueldo superior al sueldo de alguno de los empleados con empleo Vendedor.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT nombre, sueldo
+FROM Empleados
+WHERE sueldo &gt; ANY (SELECT sueldo FROM Empleados WHERE empleo = &#39;Vendedor&#39;);
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">9 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>nombre</th>
+            <th>sueldo</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Allen</td>
+            <td>1600.0</td>
+        </tr>
+        <tr>
+            <td>Jones</td>
+            <td>2975.0</td>
+        </tr>
+        <tr>
+            <td>Blake</td>
+            <td>2850.0</td>
+        </tr>
+        <tr>
+            <td>Clark</td>
+            <td>2450.0</td>
+        </tr>
+        <tr>
+            <td>Scott</td>
+            <td>3000.0</td>
+        </tr>
+        <tr>
+            <td>King</td>
+            <td>5000.0</td>
+        </tr>
+        <tr>
+            <td>Turner</td>
+            <td>1500.0</td>
+        </tr>
+        <tr>
+            <td>Ford</td>
+            <td>3000.0</td>
+        </tr>
+        <tr>
+            <td>Miller</td>
+            <td>1300.0</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+</section>
+<section id="subconsultas-en-from">
+<h3>Subconsultas en FROM<a class="headerlink" href="#subconsultas-en-from" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p><strong>NOTA</strong></p>
+<p>Un uso más avanzado de las subconsultas consiste en la creación de una consulta en la cláusula <code class="docutils literal notranslate"><span class="pre">FROM</span></code>. La subconsulta recibirá un nombre provisional que podrá ser utilizado en la consulta externa como si de una tabla existente se tratase.</p>
+</div></blockquote>
+<p>Ejemplo. Mostrar para cada número de departamento el nombre, empleo y sueldo del empleado con mayor sueldo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT departamento_id, nombre, empleo, sueldo
+FROM (SELECT departamento_id, nombre, empleo, sueldo, ROW_NUMBER() OVER (PARTITION BY departamento_id ORDER BY sueldo DESC) AS rn
+      FROM Empleados) AS sub
+WHERE rn = 1;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">3 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>departamento_id</th>
+            <th>nombre</th>
+            <th>empleo</th>
+            <th>sueldo</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>10</td>
+            <td>King</td>
+            <td>Director</td>
+            <td>5000.0</td>
+        </tr>
+        <tr>
+            <td>20</td>
+            <td>Scott</td>
+            <td>Analista</td>
+            <td>3000.0</td>
+        </tr>
+        <tr>
+            <td>30</td>
+            <td>Blake</td>
+            <td>Directivo</td>
+            <td>2850.0</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+</section>
+</section>
+<section id="insercion-modificacion-y-eliminacion-de-registros">
+<h2>Inserción, modificación y eliminación de registros<a class="headerlink" href="#insercion-modificacion-y-eliminacion-de-registros" title="Link to this heading">#</a></h2>
+<section id="uso-basico-de-insert-introduccion-de-todos-los-valores">
+<h3>Uso básico de INSERT (Introducción de todos los valores)<a class="headerlink" href="#uso-basico-de-insert-introduccion-de-todos-los-valores" title="Link to this heading">#</a></h3>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">tabla</span>
+<span class="k">VALUES</span><span class="p">(</span><span class="n">valor</span><span class="w"> </span><span class="n">columna</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="p">...,</span><span class="w"> </span><span class="n">valor</span><span class="w"> </span><span class="n">columna</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Ejemplo. Insertar tres empleados en el departamento 40. Uno de ellos es el jefe de los otros dos y no tendrá complemento.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+INSERT INTO Empleados (id, nombre, empleo, sueldo, complemento, departamento_id, jefe)
+VALUES (8001, &#39;Juan&#39;, &#39;Jefe&#39;, 3000, NULL, 40, NULL),
+       (8002, &#39;Ana&#39;, &#39;Empleado&#39;, 2000, 200, 40, 8001),
+       (8003, &#39;Luis&#39;, &#39;Empleado&#39;, 1800, 150, 40, 8001);
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">3 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table></div></div>
+</div>
+<p>Ejemplo. Mostrar los registros de los empleados del departamento Operaciones para comprobar el resultado de las 3 inserciones.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT *
+FROM Empleados
+WHERE departamento_id = 40;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">3 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>nombre</th>
+            <th>empleo</th>
+            <th>jefe</th>
+            <th>fecha_entrada</th>
+            <th>sueldo</th>
+            <th>complemento</th>
+            <th>departamento_id</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>8001</td>
+            <td>Juan</td>
+            <td>Jefe</td>
+            <td>None</td>
+            <td>None</td>
+            <td>3000.0</td>
+            <td>None</td>
+            <td>40</td>
+        </tr>
+        <tr>
+            <td>8002</td>
+            <td>Ana</td>
+            <td>Empleado</td>
+            <td>8001</td>
+            <td>None</td>
+            <td>2000.0</td>
+            <td>200.0</td>
+            <td>40</td>
+        </tr>
+        <tr>
+            <td>8003</td>
+            <td>Luis</td>
+            <td>Empleado</td>
+            <td>8001</td>
+            <td>None</td>
+            <td>1800.0</td>
+            <td>150.0</td>
+            <td>40</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+</section>
+<section id="uso-de-insert-para-anadir-filas-incompletas-no-se-introducen-todos-los-valores">
+<h3>Uso de INSERT para añadir filas incompletas (No se introducen todos los valores)<a class="headerlink" href="#uso-de-insert-para-anadir-filas-incompletas-no-se-introducen-todos-los-valores" title="Link to this heading">#</a></h3>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">tabla</span><span class="p">(</span><span class="n">columna1</span><span class="p">,</span><span class="w"> </span><span class="p">...,</span><span class="w"> </span><span class="n">columna</span><span class="w"> </span><span class="n">m</span><span class="p">)</span>
+<span class="k">VALUES</span><span class="p">(</span><span class="n">valor</span><span class="w"> </span><span class="n">columna</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="p">...,</span><span class="w"> </span><span class="n">valor</span><span class="w"> </span><span class="n">columna</span><span class="w"> </span><span class="n">m</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Ejemplo. Insertar un empleado en el departamento 40 omitiendo la columna complemento.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+INSERT INTO Empleados (id, nombre, empleo, sueldo, departamento_id, jefe)
+VALUES (8004, &#39;Carlos&#39;, &#39;Empleado&#39;, 1900, 40, 8001);
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">1 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table></div></div>
+</div>
+</section>
+<section id="actualizacion-de-registros-con-update">
+<h3>Actualización de registros con UPDATE<a class="headerlink" href="#actualizacion-de-registros-con-update" title="Link to this heading">#</a></h3>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">UPDATE</span><span class="w"> </span><span class="n">tabla</span>
+<span class="k">SET</span><span class="w"> </span><span class="n">campo</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">valor</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="p">...,</span><span class="w"> </span><span class="n">campo</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">valor</span><span class="w"> </span><span class="n">n</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">condicion</span>
+</pre></div>
+</div>
+<p>Ejemplo. Actualizar a 120 el valor del complemento del empleado con numero 8003</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+UPDATE Empleados
+SET complemento = 120
+WHERE id = 8003;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">1 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table></div></div>
+</div>
+<p>Ejemplo. Empleados del departamento de Operaciones tras la actualización del complemento del empleado 8003.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT *
+FROM Empleados
+WHERE departamento_id = 40;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">4 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>nombre</th>
+            <th>empleo</th>
+            <th>jefe</th>
+            <th>fecha_entrada</th>
+            <th>sueldo</th>
+            <th>complemento</th>
+            <th>departamento_id</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>8001</td>
+            <td>Juan</td>
+            <td>Jefe</td>
+            <td>None</td>
+            <td>None</td>
+            <td>3000.0</td>
+            <td>None</td>
+            <td>40</td>
+        </tr>
+        <tr>
+            <td>8002</td>
+            <td>Ana</td>
+            <td>Empleado</td>
+            <td>8001</td>
+            <td>None</td>
+            <td>2000.0</td>
+            <td>200.0</td>
+            <td>40</td>
+        </tr>
+        <tr>
+            <td>8003</td>
+            <td>Luis</td>
+            <td>Empleado</td>
+            <td>8001</td>
+            <td>None</td>
+            <td>1800.0</td>
+            <td>120.0</td>
+            <td>40</td>
+        </tr>
+        <tr>
+            <td>8004</td>
+            <td>Carlos</td>
+            <td>Empleado</td>
+            <td>8001</td>
+            <td>None</td>
+            <td>1900.0</td>
+            <td>None</td>
+            <td>40</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+</section>
+<section id="eliminacion-de-registros-con-delete">
+<h3>Eliminación de registros con DELETE<a class="headerlink" href="#eliminacion-de-registros-con-delete" title="Link to this heading">#</a></h3>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">DELETE</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">tabla</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">condicion</span>
+</pre></div>
+</div>
+<p>Ejemplo. Eliminar el empleado con número 8003</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+DELETE FROM Empleados
+WHERE id = 8003;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">1 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table></div></div>
+</div>
+<p>Ejemplo. Eliminar todos los emepleados del departamento Operaciones</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+DELETE FROM Empleados
+WHERE departamento_id = 40;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">3 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table></div></div>
+</div>
+</section>
+</section>
+<section id="vistas">
+<h2>Vistas<a class="headerlink" href="#vistas" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Se definen mediante una expresión SQL que recupera su contenido.</p></li>
+<li><p>Su contenido se obtiene bajo demanda evaluando la expresión SQL que las define</p></li>
+<li><p>Se definen a partir de tablas u otras vistas existentes</p></li>
+<li><p>Se pueden considerar tablas virtuales. No almacenan datos.</p></li>
+</ul>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">CREATE</span><span class="w"> </span><span class="k">VIEW</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span>
+<span class="n">expresion</span><span class="w"> </span><span class="k">SELECT</span>
+</pre></div>
+</div>
+<p><strong>Uso de las vistas</strong></p>
+<ul class="simple">
+<li><p>Personalización de datos</p></li>
+<li><p>Mecanismo de seguridad. Se da acceso a vistas y no a las tablas base</p></li>
+<li><p>Simplificación de consultas</p></li>
+</ul>
+<p>Ejemplo Crear una vista que combine cada departamento con los datos de sus empleados. Si no hay datos de empleados, completar con <code class="docutils literal notranslate"><span class="pre">NULL</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+CREATE VIEW Vista_Empleados_Departamentos AS
+SELECT D.nombre AS nombre_departamento, E.*
+FROM Departamentos D
+LEFT JOIN Empleados E ON D.id = E.departamento_id;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table></div></div>
+</div>
+<p>Ejemplo. Usar la vista anterior para obtener el sueldo máximo para cada departamento</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT nombre_departamento, MAX(sueldo) AS sueldo_maximo
+FROM Vista_Empleados_Departamentos
+GROUP BY nombre_departamento;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span style="None">Running query in &#x27;mysql+pymysql://example:***@mysql/example&#x27;</span></div><div class="output text_html"><span style="color: green">4 rows affected.</span></div><div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>nombre_departamento</th>
+            <th>sueldo_maximo</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Contabilidad</td>
+            <td>5000.0</td>
+        </tr>
+        <tr>
+            <td>Investigacion</td>
+            <td>3000.0</td>
+        </tr>
+        <tr>
+            <td>Ventas</td>
+            <td>2850.0</td>
+        </tr>
+        <tr>
+            <td>Operaciones</td>
+            <td>None</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./data"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="dbbasics.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Configuración del entorno de trabajo</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../LICENSE.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Licencia</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion">Introducción</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usos">Usos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuracion-del-entorno">Configuración del entorno</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sintaxis-basica">Sintaxis básica</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#operaciones-de-consulta-sencillas-para-el-filtrado-de-filas-y-columnas">Operaciones de consulta sencillas para el filtrado de filas y columnas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consultas-con-varias-condiciones">Consultas con varias condiciones</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#el-operador-logico-and">El operador lógico AND</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#el-operador-logico-or">El operador lógico OR</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#el-operador-logico-in-y-busqueda-aproximada">El operador lógico IN y búsqueda aproximada</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#manejo-de-nulos">Manejo de nulos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#consultas-de-un-rango-de-valores">Consultas de un rango de valores</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uso-de-expresiones-en-select">Uso de expresiones en SELECT</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#renombrado-de-columnas">Renombrado de columnas</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#manejo-de-fechas">Manejo de fechas</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#funciones-para-el-manejo-de-fechas">Funciones para el manejo de fechas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#codigos-de-formato-habituales-para-datediff">Códigos de formato habituales para <code class="docutils literal notranslate"><span class="pre">DATEDIFF()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eliminacion-de-duplicados">Eliminación de duplicados</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ordenacion-y-limitacion-de-resultados">Ordenación y limitación de resultados</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#funciones-de-agregacion">Funciones de agregación</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agregacion-de-resultados">Agregación de resultados</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#combinacion-de-tablas-con-producto-cartesiano">Combinación de tablas con producto cartesiano</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#combinacion-de-tablas-con-inner-join">Combinación de tablas con INNER JOIN</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#combinacion-de-tablas-con-left-join">Combinación de tablas con LEFT JOIN</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uso-de-alias-para-tablas">Uso de alias para tablas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#subconsultas">Subconsultas</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#los-operadores-all-y-any">Los operadores ALL y ANY</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subconsultas-en-from">Subconsultas en FROM</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#insercion-modificacion-y-eliminacion-de-registros">Inserción, modificación y eliminación de registros</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uso-basico-de-insert-introduccion-de-todos-los-valores">Uso básico de INSERT (Introducción de todos los valores)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uso-de-insert-para-anadir-filas-incompletas-no-se-introducen-todos-los-valores">Uso de INSERT para añadir filas incompletas (No se introducen todos los valores)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#actualizacion-de-registros-con-update">Actualización de registros con UPDATE</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eliminacion-de-registros-con-delete">Eliminación de registros con DELETE</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vistas">Vistas</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Tu Nombre
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

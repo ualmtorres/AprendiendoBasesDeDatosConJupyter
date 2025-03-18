@@ -1,0 +1,9 @@
+# Archivo _toc.yml
+format: jb-book  # Formato del libro
+
+root: data/intro  # Página principal del libro (intro.md o intro.ipynb)
+
+chapters:
+  - file: data/dbbasics
+  - file: data/sql
+  - file: LICENSE.md

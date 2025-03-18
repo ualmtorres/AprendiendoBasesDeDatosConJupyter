@@ -1,0 +1,24 @@
+# Archivo _config.yml
+title: "Mi Tutorial en Jupyter Book"
+author: "Tu Nombre"
+logo: "assets/di.png"  # Opcional: logo para la portada
+
+execute:
+  execute_notebooks: "off"  # Cambia a "force" si quieres que los notebooks se ejecuten al compilar el libro
+
+html:
+  navbar_number_sections: true  # Agrega numeración a las secciones del menú
+  use_repository_button: true  # Muestra botón de GitHub si el proyecto está en un repo
+  use_edit_page_button: true  # Opción para editar en GitHub
+  use_issues_button: true  # Botón para reportar problemas en GitHub
+
+repository:
+  url: "https://github.com/ualmtorres/AprendiendoBasesDeDatosConJupyter"  # URL de tu repo
+  branch: main
+  path_to_book: "_build/html"  # Carpeta donde está el libro dentro del repo
+
+launch_buttons:
+  jupyterhub_url: "http://localhost:8888/lab"
+  colab: false
+  binderhub_url: ""
+  thebe: false
