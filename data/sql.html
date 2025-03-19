@@ -1657,10 +1657,10 @@ FROM Empleados;
 </table>
 <span style="font-style:italic;text-align:center;">Truncated to <a href="https://jupysql.ploomber.io/en/latest/api/configuration.html#displaylimit">displaylimit</a> of 10.</span></div></div>
 </div>
-<blockquote>
-<div><p><strong>NOTA</strong></p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
 <p>La aparición de un valor NULL en una operación aritmética hace que el resultado sea NULL. Por ejemplo, <code class="docutils literal notranslate"><span class="pre">NULL</span> <span class="pre">+</span> <span class="pre">valor</span> <span class="pre">=</span> <span class="pre">NULL</span></code></p>
-</div></blockquote>
+</div>
 <p>Ejemplo. Mostrar nombre, sueldo, complemento, sueldo y complemento de todos los empleados</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1745,10 +1745,10 @@ FROM Empleados;
 </table>
 <span style="font-style:italic;text-align:center;">Truncated to <a href="https://jupysql.ploomber.io/en/latest/api/configuration.html#displaylimit">displaylimit</a> of 10.</span></div></div>
 </div>
-<blockquote>
-<div><p><strong>NOTA</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p><code class="docutils literal notranslate"><span class="pre">COALESCE</span></code> es una función que permite asociar un valor a una columna cuando es <code class="docutils literal notranslate"><span class="pre">NULL</span></code>. Por ejemplo, <code class="docutils literal notranslate"><span class="pre">COALESCE(complemento,</span> <span class="pre">0)</span></code> indica que <code class="docutils literal notranslate"><span class="pre">complemento</span></code> tome el valor <code class="docutils literal notranslate"><span class="pre">0</span></code> cuando tenga un valor de <code class="docutils literal notranslate"><span class="pre">NULL</span></code>.</p>
-</div></blockquote>
+</div>
 <p>Ejemplo. Mostrar nombre, sueldo, complemento, sueldo y complemento de todos los empleados considerando como 0 los complementos nulos</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1984,10 +1984,10 @@ WHERE fecha_entrada &gt;= &#39;2002-01-01&#39;;
 </div>
 <section id="funciones-para-el-manejo-de-fechas">
 <h3>Funciones para el manejo de fechas<a class="headerlink" href="#funciones-para-el-manejo-de-fechas" title="Link to this heading">#</a></h3>
-<blockquote>
-<div><p><strong>NOTA</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>La función <code class="docutils literal notranslate"><span class="pre">YEAR()</span></code> aplicada a una fecha devuelve el año de la fecha en formato numérico.</p>
-</div></blockquote>
+</div>
 <p>Ejemplo. Mostrar todas las filas de los empleados cuya fecha de entrada no sea del año 2000</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2175,10 +2175,10 @@ WHERE YEAR(fecha_entrada) NOT IN (2000, 2001);
     </tbody>
 </table></div></div>
 </div>
-<blockquote>
-<div><p><strong>NOTA</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>La función <code class="docutils literal notranslate"><span class="pre">CURDATE()</span></code> devuelve la fecha actual.</p>
-</div></blockquote>
+</div>
 <p>Ejemplo. Mostrar nombre, empleo, fecha actual, fecha de entrada y diferencia entre fecha actual y fecha de entrada</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2274,11 +2274,11 @@ FROM Empleados;
 </table>
 <span style="font-style:italic;text-align:center;">Truncated to <a href="https://jupysql.ploomber.io/en/latest/api/configuration.html#displaylimit">displaylimit</a> of 10.</span></div></div>
 </div>
-<blockquote>
-<div><p><strong>NOTA</strong></p>
-<p>La diferencia aritmética entre <code class="docutils literal notranslate"><span class="pre">CURDATE()</span></code> y la fecha de entrada devuelve un resultado anómalo. Usar en su lugar la función <code class="docutils literal notranslate"><span class="pre">DATEDIFF()</span></code>.</p>
-<p>La función <code class="docutils literal notranslate"><span class="pre">DATEDIFF()</span></code> devuelve la diferencia en días entre dos fechas.</p>
-</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>La diferencia aritmética entre <code class="docutils literal notranslate"><span class="pre">CURDATE()</span></code> y la fecha de entrada devuelve un resultado anómalo. Usar en su lugar la función <code class="docutils literal notranslate"><span class="pre">DATEDIFF()</span></code>.
+La función <code class="docutils literal notranslate"><span class="pre">DATEDIFF()</span></code> devuelve la diferencia en días entre dos fechas.</p>
+</div>
 <p>Ejemplo. Mostrar nombre, empleo y antigüedad en días de todos los empleados.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2352,10 +2352,10 @@ FROM Empleados;
 </table>
 <span style="font-style:italic;text-align:center;">Truncated to <a href="https://jupysql.ploomber.io/en/latest/api/configuration.html#displaylimit">displaylimit</a> of 10.</span></div></div>
 </div>
-<blockquote>
-<div><p><strong>NOTA</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>La función <code class="docutils literal notranslate"><span class="pre">DATE_FORMAT()</span></code> permite dar formato a un valor de tipo fecha. El formato se define en una cadena aplicando unos códigos de formato como los de la tabla siguiente.</p>
-</div></blockquote>
+</div>
 </section>
 <section id="codigos-de-formato-habituales-para-datediff">
 <h3>Códigos de formato habituales para <code class="docutils literal notranslate"><span class="pre">DATEDIFF()</span></code><a class="headerlink" href="#codigos-de-formato-habituales-para-datediff" title="Link to this heading">#</a></h3>
@@ -2469,10 +2469,10 @@ FROM Empleados;
 </section>
 <section id="eliminacion-de-duplicados">
 <h3>Eliminación de duplicados<a class="headerlink" href="#eliminacion-de-duplicados" title="Link to this heading">#</a></h3>
-<blockquote>
-<div><p><strong>NOTA</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p><code class="docutils literal notranslate"><span class="pre">DISTINCT</span></code> elimina los resultados duplicados tras la evaluación de una consulta.</p>
-</div></blockquote>
+</div>
 <p>Ejemplo. Mostrar los diferentes empleos que tienen los empleados almacenados.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2511,10 +2511,10 @@ FROM Empleados;
 </section>
 <section id="ordenacion-y-limitacion-de-resultados">
 <h3>Ordenación y limitación de resultados<a class="headerlink" href="#ordenacion-y-limitacion-de-resultados" title="Link to this heading">#</a></h3>
-<blockquote>
-<div><p><strong>NOTA</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>La cláusula ORDER BY ordena los resultados de una consulta usando como criterios de ordenación la lista de columnas proporcionada.</p>
-</div></blockquote>
+</div>
 <p>Ejemplo. Mostrar todas las filas de empleados ordenadas por sueldo</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2773,10 +2773,10 @@ ORDER BY empleo, sueldo DESC;
 </table>
 <span style="font-style:italic;text-align:center;">Truncated to <a href="https://jupysql.ploomber.io/en/latest/api/configuration.html#displaylimit">displaylimit</a> of 10.</span></div></div>
 </div>
-<blockquote>
-<div><p><strong>NOTA</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>La cláusula <code class="docutils literal notranslate"><span class="pre">LIMIT</span></code> limita el número de filas devueltas al valor especificado.</p>
-</div></blockquote>
+</div>
 <p>Ejemplo. Mostrar las filas de los 3 empleados que tienen mayor sueldo</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2839,10 +2839,10 @@ LIMIT 3;
 </section>
 <section id="funciones-de-agregacion">
 <h3>Funciones de agregación<a class="headerlink" href="#funciones-de-agregacion" title="Link to this heading">#</a></h3>
-<blockquote>
-<div><p><strong>NOTA</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>La función <code class="docutils literal notranslate"><span class="pre">MAX()</span></code> aplicada a una columna obtiene el valor máximo de la columna en los registros aplicados.</p>
-</div></blockquote>
+</div>
 <p>Ejemplo. Obtener el sueldo máximo de la tabla de empleados</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2889,10 +2889,10 @@ FROM Empleados;
     </tbody>
 </table></div></div>
 </div>
-<blockquote>
-<div><p><strong>NOTA</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>La función <code class="docutils literal notranslate"><span class="pre">MIN()</span></code> aplicada a una columna obtiene el valor mínimo de la columna en los registros aplicados.</p>
-</div></blockquote>
+</div>
 <p>Ejemplo. Obtener la fecha de entrada más antigua</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2939,10 +2939,10 @@ FROM Empleados;
     </tbody>
 </table></div></div>
 </div>
-<blockquote>
-<div><p><strong>NOTA</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>La función <code class="docutils literal notranslate"><span class="pre">SUM()</span></code> aplicada a una columna obtiene la suma de los valores de la columna en los registros aplicados.</p>
-</div></blockquote>
+</div>
 <p>Ejemplo. Obtener la suma de los sueldos dedicados a empleos de dirección.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2967,10 +2967,10 @@ WHERE empleo LIKE &#39;%Director%&#39;;
     </tbody>
 </table></div></div>
 </div>
-<blockquote>
-<div><p><strong>NOTA</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>La función <code class="docutils literal notranslate"><span class="pre">AVG()</span></code> aplicada a una columna obtiene la media de los valores numéricos de la columna en los registros aplicados.</p>
-</div></blockquote>
+</div>
 <p>Ejemplo. Obtener el sueldo medio del empleo Vendedor.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2995,10 +2995,10 @@ WHERE empleo = &#39;Vendedor&#39;;
     </tbody>
 </table></div></div>
 </div>
-<blockquote>
-<div><p><strong>NOTA</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>La función <code class="docutils literal notranslate"><span class="pre">COUNT()</span></code> aplicada a una columna obtiene la cantidad de valores no nulos en los registros aplicados. La función <code class="docutils literal notranslate"><span class="pre">COUNT(*)</span></code> devuelve la cantidad de filas del resultado.</p>
-</div></blockquote>
+</div>
 <p>Ejemplo. Obtener la cantidad de empleados que tenemos almacenados</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -3022,10 +3022,10 @@ FROM Empleados;
     </tbody>
 </table></div></div>
 </div>
-<blockquote>
-<div><p><strong>NOTA</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Al añadir <code class="docutils literal notranslate"><span class="pre">DISTINCT</span></code> a la columna a la que se aplica <code class="docutils literal notranslate"><span class="pre">COUNT()</span></code> se obtiene la cuenta de valores diferentes eliminando los duplicados.</p>
-</div></blockquote>
+</div>
 <p>Ejemplo. Obtener el número de empleos diferentes que tienen los empleados</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -3049,10 +3049,10 @@ FROM Empleados;
     </tbody>
 </table></div></div>
 </div>
-<blockquote>
-<div><p><strong>NOTA</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p><code class="docutils literal notranslate"><span class="pre">COUNT</span> <span class="pre">(DISTINCT</span> <span class="pre">columna)</span></code> descarta los valores nulos.</p>
-</div></blockquote>
+</div>
 <p>Ejemplo. Obtener la cantidad de jefes diferentes</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -3081,10 +3081,10 @@ WHERE jefe IS NOT NULL;
 </section>
 <section id="agregacion-de-resultados">
 <h2>Agregación de resultados<a class="headerlink" href="#agregacion-de-resultados" title="Link to this heading">#</a></h2>
-<blockquote>
-<div><p><strong>NOTA</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>La cláusula GROUP BY crea grupos para la lista de columnas indicadas. Los grupos creados son la base a los que se les puede aplicar funciones de agregación <code class="docutils literal notranslate"><span class="pre">COUNT()</span></code>, <code class="docutils literal notranslate"><span class="pre">SUM()</span></code>, <code class="docutils literal notranslate"><span class="pre">MAX()</span></code>, <code class="docutils literal notranslate"><span class="pre">MIN()</span></code> y <code class="docutils literal notranslate"><span class="pre">AVG()</span></code>.</p>
-</div></blockquote>
+</div>
 <p>Ejemplo. Obtener la cantidad de empleados que tiene cada empleo</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -3208,10 +3208,10 @@ GROUP BY YEAR(fecha_entrada);
     </tbody>
 </table></div></div>
 </div>
-<blockquote>
-<div><p><strong>NOTA</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>La cláusula HAVING actúa como un filtro sobre los valores agregados.</p>
-</div></blockquote>
+</div>
 <p>Ejemplo. Obtener la cantidad de empleados por año de entrada para aquellos años que tengan más de 5 empleados.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -3239,10 +3239,10 @@ HAVING COUNT(*) &gt; 5;
     </tbody>
 </table></div></div>
 </div>
-<blockquote>
-<div><p><strong>NOTA</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>No confundir la cláusula <code class="docutils literal notranslate"><span class="pre">WHERE</span></code> con la cláusula <code class="docutils literal notranslate"><span class="pre">HAVING</span></code>. <code class="docutils literal notranslate"><span class="pre">WHERE</span></code> actúa como un filtro para filas previo a la agregación. <code class="docutils literal notranslate"><span class="pre">HAVING</span></code> actúa como un filtro para grupos posterior al proceso de agregación.</p>
-</div></blockquote>
+</div>
 <p>Ejemplo. Obtener la cantidad de empleados por año de entrada considerando sólo aquellos empleados con sueldos comprendidos entre 2000 y 3000.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -3304,10 +3304,10 @@ HAVING COUNT(*) &gt; 3;
 </div>
 <section id="combinacion-de-tablas-con-producto-cartesiano">
 <h3>Combinación de tablas con producto cartesiano<a class="headerlink" href="#combinacion-de-tablas-con-producto-cartesiano" title="Link to this heading">#</a></h3>
-<blockquote>
-<div><p><strong>NOTA</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>La operación de producto cartesiano (o <code class="docutils literal notranslate"><span class="pre">CROSS</span></code>JOIN`) combina todas las filas de las tablas indicadas</p>
-</div></blockquote>
+</div>
 <p>Ejemplo. Mostrar todas las filas resultantes de combinar los empleados con los departamentos</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -3469,10 +3469,10 @@ FROM Empleados, Departamentos;
 </table>
 <span style="font-style:italic;text-align:center;">Truncated to <a href="https://jupysql.ploomber.io/en/latest/api/configuration.html#displaylimit">displaylimit</a> of 10.</span></div></div>
 </div>
-<blockquote>
-<div><p><strong>NOTA</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>El resultado combina cada empleado con todos los departamentos existentes, aunque no sea el departamento en que trabaja.</p>
-</div></blockquote>
+</div>
 <p>Ejemplo. Usar <code class="docutils literal notranslate"><span class="pre">CROSS</span> <span class="pre">JOIN</span></code> para mostrar todas las filas resultantes de combinar los empleados con los departamentos</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -3635,10 +3635,10 @@ CROSS JOIN Departamentos;
 </table>
 <span style="font-style:italic;text-align:center;">Truncated to <a href="https://jupysql.ploomber.io/en/latest/api/configuration.html#displaylimit">displaylimit</a> of 10.</span></div></div>
 </div>
-<blockquote>
-<div><p><strong>NOTA</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>La eliminación de las filas que combinan los empleados con departamentos en los que no trabajan se puede realizar aplicando un filtro que seleccione sólo las filas en que coincidan el número de departamento en el que trabajan los empleados con el número de los departamentos.</p>
-</div></blockquote>
+</div>
 <p>Ejemplo. Mostrar las filas resultantes de combinar los empleados con los departamentos en los que trabaja cada uno de ellos.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -4017,10 +4017,10 @@ HAVING AVG(Empleados.sueldo) &gt; 2000;
 </section>
 <section id="combinacion-de-tablas-con-inner-join">
 <h3>Combinación de tablas con INNER JOIN<a class="headerlink" href="#combinacion-de-tablas-con-inner-join" title="Link to this heading">#</a></h3>
-<blockquote>
-<div><p><strong>NOTA</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>El operador <code class="docutils literal notranslate"><span class="pre">INNER</span> <span class="pre">JOIN</span></code> combina en una única operación el producto cartesiano y el filtrado de filas con el criterio indicado. La condición de filtrado pasa de la cláusula <code class="docutils literal notranslate"><span class="pre">WHERE</span></code> a la cláusula <code class="docutils literal notranslate"><span class="pre">FROM</span></code> sacando de la cláusula <code class="docutils literal notranslate"><span class="pre">WHERE</span></code> las <em>condiciones de join</em>.</p>
-</div></blockquote>
+</div>
 <p>Ejemplo. Usar el operador INNER JOIN para mostrar todas las columnas de empleado junto al nombre del departamento en que trabajan para aquellos empleados que trabajan en el departamento de Ventas.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -4120,10 +4120,10 @@ WHERE Departamentos.nombre = &#39;Ventas&#39;;
 </section>
 <section id="combinacion-de-tablas-con-left-join">
 <h3>Combinación de tablas con LEFT JOIN<a class="headerlink" href="#combinacion-de-tablas-con-left-join" title="Link to this heading">#</a></h3>
-<blockquote>
-<div><p><strong>NOTA</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>El operador <code class="docutils literal notranslate"><span class="pre">LEFT</span> <span class="pre">JOIN</span></code> relaja al operador <code class="docutils literal notranslate"><span class="pre">INNER</span> <span class="pre">JOIN</span></code> mostrando en los resultados todas las filas de la tabla que aparece a la izquierda del <code class="docutils literal notranslate"><span class="pre">LEFT</span> <span class="pre">JOIN</span></code>. Si hay valores con los que combinar mostrará los valores. Si no hay valores, completará el resultado con valores <code class="docutils literal notranslate"><span class="pre">NULL</span></code>.</p>
-</div></blockquote>
+</div>
 <p>Ejemplo. Obtener la cantidad de empleados que tiene cada departamento.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -4163,10 +4163,10 @@ GROUP BY Departamentos.nombre;
     </tbody>
 </table></div></div>
 </div>
-<blockquote>
-<div><p><strong>NOTA</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Si se realiza la combinación de tablas con el operador <code class="docutils literal notranslate"><span class="pre">INNER</span> <span class="pre">JOIN</span></code> se perdería el departamento de Operaciones.</p>
-</div></blockquote>
+</div>
 <p>Ejemplo. Obtener la cantidad de empleados que tiene cada departamento usando <code class="docutils literal notranslate"><span class="pre">INNER</span> <span class="pre">JOIN</span></code></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -4206,10 +4206,10 @@ GROUP BY Departamentos.nombre;
 </section>
 <section id="uso-de-alias-para-tablas">
 <h2>Uso de alias para tablas<a class="headerlink" href="#uso-de-alias-para-tablas" title="Link to this heading">#</a></h2>
-<blockquote>
-<div><p><strong>NOTA</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Es posible utilizar un nuevo nombre (o alias) para una tabla involucrada en una consulta. Un caso habitual de uso de los alias es para usar un nombre abreviado para las tablas.</p>
-</div></blockquote>
+</div>
 <p>Ejemplo. Obtener la cantidad de empleados por nombre de departamento</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -4249,17 +4249,17 @@ GROUP BY D.nombre;
     </tbody>
 </table></div></div>
 </div>
-<blockquote>
-<div><p><strong>NOTA</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>El uso de alias hace que la tabla a la que se le ha aplicado el alias pase a ser denominada con el nombre del alias. El uso del nombre anterior produciría un error.</p>
-</div></blockquote>
+</div>
 </section>
 <section id="subconsultas">
 <h2>Subconsultas<a class="headerlink" href="#subconsultas" title="Link to this heading">#</a></h2>
-<blockquote>
-<div><p><strong>NOTA</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Los resultados que devuelve una consulta pueden ser usados para evaluar las condiciones de otras consultas. Esto se consigue anidando consultas. Las consultas internas se denominan subconsultas, que son evaluadas en primer lugar ofreciendo sus valores a las consultas exteriores.</p>
-</div></blockquote>
+</div>
 <p>Ejemplo. Obtener nombre y sueldo de los empleados que tienen un sueldo superior al sueldo del empleado Allen.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -4354,10 +4354,10 @@ WHERE sueldo &gt; (SELECT MAX(sueldo) FROM Empleados WHERE empleo = &#39;Vendedo
 </div>
 <section id="los-operadores-all-y-any">
 <h3>Los operadores ALL y ANY<a class="headerlink" href="#los-operadores-all-y-any" title="Link to this heading">#</a></h3>
-<blockquote>
-<div><p><strong>NOTA</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p><code class="docutils literal notranslate"><span class="pre">ALL</span></code> se evalua como verdadero cuando se cumple para todos los valores afectados. <code class="docutils literal notranslate"><span class="pre">ANY</span></code> se evalua como verdadero cuando se cumple para alguno de los valores afectados.</p>
-</div></blockquote>
+</div>
 <p>Ejemplo. Obtener nombre y sueldo de los empleados que tienen un sueldo superior al sueldo de todos los empleados con empleo Vendedor.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -4465,10 +4465,10 @@ WHERE sueldo &gt; ANY (SELECT sueldo FROM Empleados WHERE empleo = &#39;Vendedor
 </section>
 <section id="subconsultas-en-from">
 <h3>Subconsultas en FROM<a class="headerlink" href="#subconsultas-en-from" title="Link to this heading">#</a></h3>
-<blockquote>
-<div><p><strong>NOTA</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Un uso más avanzado de las subconsultas consiste en la creación de una consulta en la cláusula <code class="docutils literal notranslate"><span class="pre">FROM</span></code>. La subconsulta recibirá un nombre provisional que podrá ser utilizado en la consulta externa como si de una tabla existente se tratase.</p>
-</div></blockquote>
+</div>
 <p>Ejemplo. Mostrar para cada número de departamento el nombre, empleo y sueldo del empleado con mayor sueldo.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
