@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Introducción &#8212; Aprendiendo bases de datos con Jupyter</title>
+    <title>Aprendiendo bases de datos con Jupyter &#8212; Aprendiendo bases de datos con Jupyter</title>
   
   
   
@@ -57,10 +57,10 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'data/intro';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/intro';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Configuración del entorno de trabajo" href="dbbasics.html" />
+    <link rel="next" title="1. Configuración del entorno de trabajo" href="entorno/dbbasics.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -176,13 +176,20 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1 current active">
                 <a class="reference internal" href="#">
-                    Introducción
+                    Aprendiendo bases de datos con Jupyter
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="dbbasics.html">Configuración del entorno de trabajo</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sql.html">Introducción práctica a SQL</a></li>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Preparación del entorno</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="entorno/dbbasics.html">1. Configuración del entorno de trabajo</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Aprendiendo bases de datos</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="aprendiendo/sql.html">2. Introducción práctica a SQL</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Licencia</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../LICENSE.html">Licencia</a></li>
 </ul>
 
@@ -253,7 +260,7 @@
       
       
       
-      <li><a href="../_sources/data/intro.ipynb" target="_blank"
+      <li><a href="../_sources/notebooks/intro.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -263,7 +270,7 @@
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.ipynb</span>
+<span class="btn__text-container">.md</span>
 </a>
 </li>
       
@@ -337,7 +344,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Introducción</h1>
+    <h1>Aprendiendo bases de datos con Jupyter</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -347,6 +354,9 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#detalles-del-libro">Detalles del libro</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#despliegue">Despliegue</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#actualizacion-y-publicacion-del-jupyter-book">Actualización y publicación del Jupyter Book</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#licencia">Licencia</a></li>
 </ul>
             </nav>
@@ -359,16 +369,68 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="introduccion">
-<h1>Introducción<a class="headerlink" href="#introduccion" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="aprendiendo-bases-de-datos-con-jupyter">
+<h1>Aprendiendo bases de datos con Jupyter<a class="headerlink" href="#aprendiendo-bases-de-datos-con-jupyter" title="Link to this heading">#</a></h1>
+<p>Manuel Torres, Departamento de Informática, Universidad de Almería</p>
 <p>Este libro Jupyter está diseñado para enseñar los conceptos básicos de bases de datos utilizando ejemplos prácticos y herramientas interactivas. A lo largo de este libro, exploraremos cómo trabajar con bases de datos relacionales, realizar consultas SQL y analizar datos de manera eficiente.</p>
 <p>El contenido se desarrolla mediante notebooks prácticos proporcionando una combinación de teoría y práctica para facilitar el aprendizaje. ¡Comencemos a explorar el mundo de las bases de datos!</p>
+<p><a class="reference external" href="https://ualmtorres.github.io/AprendiendoBasesDeDatosConJupyter"><img alt="Jupyter Book Badge" src="https://jupyterbook.org/badge.svg" /></a>
+<a class="reference external" href="https://doi.org/10.5281/zenodo.15059033"><img alt="DOI" src="https://zenodo.org/badge/DOI/10.5281/zenodo.15059033.svg" /></a></p>
+<section id="detalles-del-libro">
+<h2>Detalles del libro<a class="headerlink" href="#detalles-del-libro" title="Link to this heading">#</a></h2>
+<p>Este repositorio contiene:</p>
+<ul class="simple">
+<li><p>Carpeta <code class="docutils literal notranslate"><span class="pre">setup-enviroment</span></code>: Incluye un archivo <code class="docutils literal notranslate"><span class="pre">docker-compose.yml</span></code> para levantar un entorno de Jupyter con PostgreSQL y MySQL. Los puertos predeterminados son:</p>
+<ul>
+<li><p>Jupyter: 8888</p></li>
+<li><p>PostgreSQL: 5432</p></li>
+<li><p>MySQL: 3306</p></li>
+</ul>
+</li>
+<li><p>Carpeta <code class="docutils literal notranslate"><span class="pre">notebooks</span></code>: Incluye los notebooks de Jupyter con los ejemplos y ejercicios para aprender bases de datos.</p></li>
+<li><p>Carpeta <code class="docutils literal notranslate"><span class="pre">data</span></code>: Incluye los datos necesarios para los ejemplos y ejercicios.</p></li>
+<li><p>Carpeta <code class="docutils literal notranslate"><span class="pre">assets</span></code>: Incluye las imágenes necesarias para los notebooks.</p></li>
+<li><p>Carpeta <code class="docutils literal notranslate"><span class="pre">_build</span></code>: Incluye los notebooks en formato HTML.</p></li>
+<li><p>Archivos <code class="docutils literal notranslate"><span class="pre">_config.yml</span></code> y <code class="docutils literal notranslate"><span class="pre">_toc.yml</span></code>: Archivos de configuración de Jupyter Book.</p></li>
+<li><p>Archivo <code class="docutils literal notranslate"><span class="pre">construir-jupyterbook.sh</span></code>: Script para construir el libro de Jupyter.</p></li>
+<li><p>Archivos <code class="docutils literal notranslate"><span class="pre">README.md</span></code> y <code class="docutils literal notranslate"><span class="pre">LICENSE.md</span></code>: Archivos de información y licencia.</p></li>
+</ul>
+</section>
+<section id="despliegue">
+<h2>Despliegue<a class="headerlink" href="#despliegue" title="Link to this heading">#</a></h2>
+<p>El entorno de Jupyter se levanta con Docker Compose. El entorno contiene JupyterLab, PostgreSQL y MySQL. Para levantar el entorno, ejecutar el siguiente comando en la carpeta <code class="docutils literal notranslate"><span class="pre">setup-enviroment</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker-compose<span class="w"> </span>up<span class="w"> </span>-d
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>El entorno de Jupyter estará disponible en <code class="docutils literal notranslate"><span class="pre">http://localhost:8888</span></code> y se accede sin contraseña.</p></li>
+<li><p>El servidor de PostgreSQL estará disponible en <code class="docutils literal notranslate"><span class="pre">http://localhost:5432</span></code> con usuario <code class="docutils literal notranslate"><span class="pre">example</span></code> y contraseña <code class="docutils literal notranslate"><span class="pre">example</span></code>. La base de datos de ejemplo se llama <code class="docutils literal notranslate"><span class="pre">example</span></code>. El nombre del servidor para acceder a él desde Jupyter es <code class="docutils literal notranslate"><span class="pre">postgres</span></code>.</p></li>
+<li><p>El servidor de MySQL estará disponible en <code class="docutils literal notranslate"><span class="pre">http://localhost:3306</span></code> con usuario <code class="docutils literal notranslate"><span class="pre">example</span></code> y contraseña <code class="docutils literal notranslate"><span class="pre">example</span></code>. La base de datos de ejemplo se llama <code class="docutils literal notranslate"><span class="pre">example</span></code>. El nombre del servidor para acceder a él desde Jupyter es <code class="docutils literal notranslate"><span class="pre">mysql</span></code>.</p></li>
+</ul>
+</section>
+<section id="actualizacion-y-publicacion-del-jupyter-book">
+<h2>Actualización y publicación del Jupyter Book<a class="headerlink" href="#actualizacion-y-publicacion-del-jupyter-book" title="Link to this heading">#</a></h2>
+<p>Para actualizar el libro de Jupyter, modificar los notebooks en la carpeta <code class="docutils literal notranslate"><span class="pre">notebooks</span></code> y ejecutar el script <code class="docutils literal notranslate"><span class="pre">construir-jupyterbook.sh</span></code> en la raíz del repositorio. Una vez construido el libro, está disponible en la carpeta <code class="docutils literal notranslate"><span class="pre">_build/html</span></code>.</p>
+<p>Para publicar el libro en GitHub Pages, se puede subir la carpeta <code class="docutils literal notranslate"><span class="pre">_build/html</span></code> a la rama <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> del repositorio. Otra opción es usar <code class="docutils literal notranslate"><span class="pre">ghp-import</span></code> para publicar el libro en GitHub Pages. Para ello, instalar <code class="docutils literal notranslate"><span class="pre">ghp-import</span></code> con el siguiente comando:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>ghp-import
+</pre></div>
+</div>
+<p>A continuación, ejecutar el siguiente comando en la raíz del repositorio:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ghp-import<span class="w"> </span>-n<span class="w"> </span>-p<span class="w"> </span>-f<span class="w"> </span>_build/html
+</pre></div>
+</div>
+</section>
 <section id="licencia">
 <h2>Licencia<a class="headerlink" href="#licencia" title="Link to this heading">#</a></h2>
 <p>Licencia CC BY-NC-ND 4.0</p>
 <p>Copyright (c) 2025 [Manuel Torres - Departamento de Informática - Universidad de Almería]</p>
 <p>Este proyecto está licenciado bajo la Licencia CC BY-NC-ND 4.0. Esto significa que puedes compartir el proyecto siempre que cites al autor, no lo uses para fines comerciales y no realices obras derivadas.</p>
+<p>Citar como: Manuel Torres. (2025). Aprendiendo bases de datos con Jupyter. Zenodo. <a class="reference external" href="https://doi.org/10.5281/zenodo.15059033">https://doi.org/10.5281/zenodo.15059033</a></p>
 </section>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
 <div class="toctree-wrapper compound">
 </div>
 </section>
@@ -386,7 +448,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./data"
+            path: "./notebooks"
         },
         predefinedOutput: true
     }
@@ -404,11 +466,11 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="right-next"
-       href="dbbasics.html"
+       href="entorno/dbbasics.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Configuración del entorno de trabajo</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>Configuración del entorno de trabajo</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -428,6 +490,9 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#detalles-del-libro">Detalles del libro</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#despliegue">Despliegue</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#actualizacion-y-publicacion-del-jupyter-book">Actualización y publicación del Jupyter Book</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#licencia">Licencia</a></li>
 </ul>
   </nav></div>
